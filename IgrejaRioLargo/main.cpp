@@ -1,5 +1,8 @@
-#include "mainwindow.h"
+#include "primitivas.h"
 #include <QApplication>
+#include <QtOpenGL>
+
+
 
 int main(int argc, char *argv[])
 {

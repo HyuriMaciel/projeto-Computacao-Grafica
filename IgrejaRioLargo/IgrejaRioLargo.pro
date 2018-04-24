@@ -6,11 +6,13 @@
 
 
 
+
 TEMPLATE = app
 TARGET   = openglax
 
 CONFIG += warn_off
 QT += widgets axserver opengl
+
 QT       += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
