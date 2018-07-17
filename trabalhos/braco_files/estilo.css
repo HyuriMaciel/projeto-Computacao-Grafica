@@ -1,0 +1,52 @@
+a{
+  text-decoration:none;
+  font-family:helvetica, arial;
+  color:blue;
+}
+a:hover {
+  color: red;
+  text-decoration: underline;
+}
+td{
+  font-family:helvetica, arial;
+}
+th{
+  font-family:helvetica, arial;
+}
+.emphasis{
+  font-family:helvetica, arial;
+}
+.chapter{
+  font-family:helvetica, arial;
+}
+.author{
+  font-family:helvetica, arial;
+}
+.sect1{
+  font-family:helvetica, arial;
+}
+h1{
+  font-family:helvetica, arial;
+  color:red;
+}
+body{
+  font-family:helvetica, arial;
+  border-width:0;
+}
+.toc{
+  font-family:helvetica, arial;
+  color:red;
+}
+.programlisting{
+  font-family:courier;
+  color:black;
+}
+.example{
+  color:green;
+}
+.screen{
+  font-family:courier;
+}
+p{
+  font-family:helvetica, arial;
+}

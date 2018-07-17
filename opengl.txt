@@ -1,0 +1,17 @@
+{
+	"cmd": ["g++ $file -o $file_base_name -L/usr/local/lib -lglut -lGL -lGLU"],
+	"shell": true,
+	"selector": "main.cpp",
+	"variants":
+	[
+		{
+			"name": "Run",
+			"cmd": "g++ $file -o $file_base_name -L/usr/local/lib -lglut -lGL -lGLU && ${file_path}/./${file_base_name}",
+			"shell": true
+		}
+	]
+}
+
+
+
+https://www.dca.ufrn.br/~ambj/opengl/transformacoes.html
