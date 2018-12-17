@@ -6,7 +6,7 @@
 static int shoulder = 0, elbow = 0;
 
 void init(void){
-  glClearColor (0.0,0,191,255);
+  glClearColor (0.0,0,0,0);
 }
 
 
@@ -15,14 +15,14 @@ void display(void){
   glClear (GL_COLOR_BUFFER_BIT);
   glPushMatrix();
 
-  /* origem posicionada no ombro */
+  /* origem posicionada */
   glTranslatef (-1.0, 0.0, 0.0);
   glRotatef ((GLfloat) shoulder, 0.0, 0.0, 1.0);
 
-  /* origem posicionada no centro do braço */ 
+  /* origem posicionada no centro*/ 
   glTranslatef (1.0, 0.0, 0.0);
   glPushMatrix();
-  //glScalef (2.0, 0.4, 1.0);
+  //haste do catavento
   glLineWidth(5.0f);
   glBegin(GL_LINES);
         glColor3f(139, 60, 19);
@@ -30,13 +30,13 @@ void display(void){
         glVertex2i(1, -5);
       glEnd();
   glPopMatrix();
-
-  
+ 
    
-  /* origem posicionada no cotovelo */
+  /* origem posicionada  */
   glTranslatef (1.0, 0.0, 0.0);
   glRotatef ((GLfloat) elbow, 0.0, 0.0, 1.0);
   glTranslatef (1.0, 0.0, 0.0);
+
   glPushMatrix();
   glBegin(GL_TRIANGLES);
         glColor3f(1.0f, 0.0f, 0.0f); // vermelho
@@ -64,7 +64,7 @@ void display(void){
 
   glPopMatrix();
 
-  /* origem volta para o sistema de coordenadas original */
+  /*volta para o sistema de coordenadas original */
   glPopMatrix();
   glutSwapBuffers();
 }
