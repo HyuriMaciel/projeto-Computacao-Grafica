@@ -45,7 +45,7 @@ void draw(void)
         glVertex2i(240, h2 + 0);
         glVertex2i(240, h2 + 50);
     glEnd();
-
+// Executa os comandos OpenGL
     glFlush();
 }
 

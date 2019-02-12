@@ -3,7 +3,7 @@
 #include <GL/glu.h>
 #include <stdlib.h>
 
-static int shoulder = 0, elbow = 0;
+static int shoulder = 0, sen = 0;
 
 void init(void){
   glClearColor (0.0,0,0,0);
@@ -34,7 +34,7 @@ void display(void){
    
   /* origem posicionada  */
   glTranslatef (1.0, 0.0, 0.0);
-  glRotatef ((GLfloat) elbow, 0.0, 0.0, 1.0);
+  glRotatef ((GLfloat) sen, 0.0, 0.0, 1.0);
   glTranslatef (1.0, 0.0, 0.0);
 
   glPushMatrix();
@@ -83,11 +83,11 @@ void reshape (int w, int h){
 void keyboard (unsigned char key, int x, int y){
   switch (key) {
   case 'a':
-    elbow = (elbow + 5) % 360;
+    sen = (sen + 5) % 360;
     glutPostRedisplay();
     break;
   case 'd':
-    elbow = (elbow - 5) % 360;
+    sen = (sen- 5) % 360;
     glutPostRedisplay();
     break;
   case 27:
@@ -97,6 +97,22 @@ void keyboard (unsigned char key, int x, int y){
     break;
   }
 }
+
+void MouseClick (int button, int state, int x, int y) 
+{ 
+    switch (button) 
+    { 
+        case GLUT_LEFT_BUTTON:  sen = (sen + 5) % 360;
+                                 glutPostRedisplay();
+
+                               break; 
+        case GLUT_RIGHT_BUTTON: sen = (sen- 5) % 360;
+                                glutPostRedisplay(); 
+                               break; 
+         
+    } 
+    
+} 
 
 int main(int argc, char** argv){
   glutInit(&argc, argv);
@@ -108,6 +124,7 @@ int main(int argc, char** argv){
   glutDisplayFunc(display); 
   glutReshapeFunc(reshape);
   glutKeyboardFunc(keyboard);
+   glutMouseFunc(MouseClick); 
   glutMainLoop();
   return 0;
 }
