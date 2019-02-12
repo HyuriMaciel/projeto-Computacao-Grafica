@@ -30,22 +30,21 @@ FORMS    += mainwindow.ui
 LIBS += -lGL \
         -lGLU \
         -lglut \
-        -lSOIL \
 
 
-
-LIBS += -LC:\VsIncludes\SFML\SFML_QT\SFMLLIBS\
-
-
-
-CONFIG(release, release|debug): LIBS += -lsfml-window -lsfml-audio -lsfml-graphics -lsfml-main -lsfml-system -lsfml-network
-
-
+LIBS += -lsfml-audio
+LIBS += -lsfml-graphics
+LIBS += -lsfml-network
+LIBS += -lsfml-window
+LIBS += -lsfml-system
 
 # install
 target.path = $$[QT_INSTALL_EXAMPLES]/opengl/2dpainting
 INSTALLS += target
 
 DISTFILES += \
-    img/piso.jpg
-    img/wood.jpg
+    /home/hyuri/CGprojeto/img/piso.jpg
+
+
+
+
