@@ -89,6 +89,47 @@ void rgb(float r, float g, float b){
   //glColor3f(r/255, g/255, b/255);
 }
 
+
+void drawPyramid(GLfloat x, GLfloat y, GLfloat z, GLfloat sx, GLfloat sy, GLfloat sz) {
+  glPushMatrix();
+
+    glTranslatef(x, y, z);
+    glScalef(sx, sy, sz);
+
+    glBegin(GL_TRIANGLES);
+      glTexCoord2f(0.0f, 0.0f); glVertex3i(0, 1, 0);
+      glTexCoord2f(1.0f, 0.0f); glVertex3i(-1, -1, 1);
+      glTexCoord2f(0.0f, 1.0f); glVertex3i(1, -1, 1);
+
+      glTexCoord2f(0.0f, 0.0f); glVertex3i(0, 1, 0);
+      glTexCoord2f(1.0f, 0.0f); glVertex3i(1, -1, 1);
+      glTexCoord2f(0.0f, 1.0f); glVertex3i(1, -1, -1);
+
+      glTexCoord2f(0.0f, 0.0f); glVertex3i(0, 1, 0);
+      glTexCoord2f(1.0f, 0.0f); glVertex3i(1, -1, -1);
+      glTexCoord2f(0.0f, 1.0f); glVertex3i(-1, -1, -1);
+
+      glTexCoord2f(0.0f, 0.0f); glVertex3i(0, 1, 0);
+      glTexCoord2f(1.0f, 0.0f); glVertex3i(-1, -1, -1);
+      glTexCoord2f(0.0f, 1.0f); glVertex3i(-1, -1, 1);
+    glEnd();
+
+    glBegin(GL_QUADS);
+      glTexCoord2f(1.0f, 0.0f); glVertex3i(-1, -1, 1);
+      glTexCoord2f(1.0f, 1.0f); glVertex3i(1, -1, 1);
+      glTexCoord2f(0.0f, 1.0f); glVertex3i(1, -1, -1);
+      glTexCoord2f(0.0f, 0.0f); glVertex3i(-1, -1, -1);
+    glEnd();
+  glPopMatrix();
+}
+
+void drawPyramidLine(GLfloat x, GLfloat y, GLfloat z, int n, double spacing) {
+  for (int i = 0; i < n / 2 + 1; i += 1){
+    drawPyramid(x - i * spacing, y, z, 0.1, 0.5, 0.1);
+    drawPyramid(x + i * spacing, y, z, 0.1, 0.5, 0.1);
+  }
+}
+
 void drawTriangle(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2, GLfloat x3, GLfloat y3, GLfloat z) {
   glBegin(GL_TRIANGLES);
     glTexCoord2f(0.0f, 0.0f); glVertex3f(x1,y1,z);
@@ -156,8 +197,48 @@ void drawRect(GLfloat x, GLfloat y, GLfloat z, GLfloat sx, GLfloat sy, GLfloat s
   glPopMatrix();
 }
 
+void drawCylinder(GLfloat x, GLfloat y, GLfloat z, GLdouble radius, GLdouble height) {
+    GLUquadricObj *obj = gluNewQuadric();
+    glPushMatrix();
+        glTranslatef(x, y, z);
+        glRotatef(270.0, 1.0, 0.0, 0.0);
+        glScalef(radius, radius, height);
 
+        gluQuadricDrawStyle(obj, GLU_FILL);
+        gluQuadricTexture(obj, true);
+        gluCylinder(obj, 1, 1, 1, 6, 2);
+  glPopMatrix();
+}
 
+void drawCylinderWithCut(GLfloat x, GLfloat y, GLfloat z, GLdouble radius, GLdouble height, GLfloat cut) {
+  GLUquadricObj *obj = gluNewQuadric();
+  GLdouble eqn[4] = {0.0, 1.0, 0.0, cut};
+
+  glPushMatrix();
+    glTranslatef(x, y, z);
+    glRotatef(270.0, 1.0, 0.0, 0.0);
+    glScalef(radius, radius, height);
+
+    glClipPlane (GL_CLIP_PLANE0, eqn);
+    glEnable (GL_CLIP_PLANE0);
+
+    gluQuadricDrawStyle(obj, GLU_FILL);
+    gluQuadricTexture(obj, true);
+    gluCylinder(obj, 1, 1, 1, 30, 2);
+
+    glDisable(GL_CLIP_PLANE0);
+  glPopMatrix();
+}
+
+void drawColumnLine(float x, float y, float z, int n, float spacing) {
+  float start = spacing/2;
+  float end = start + (n)/2 * spacing;
+
+  for (float i = start; i < end; i+= spacing){
+    drawCylinder(x - i * spacing, y, z, 0.2, 3);
+    drawCylinder(x + i * spacing, y, z, 0.2, 3);
+  }
+}
 void drawDoor(){
   glPushMatrix();
     glRotatef(doorAngle, 0, 1, 0);
@@ -179,248 +260,8 @@ void mouseFunc(int button, int state, int x, int y) {
 void desenha(void) {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-/*---------------------Piso---------------------------------------*/
 
-  glBindTexture(GL_TEXTURE_2D, texture_handle[PISO]);
-  drawRect(0, 0, 0, 11, 0.3, 24,1,1,1);
-
-/*---------------------Teto---------------------------------------*/
-
-  glBindTexture(GL_TEXTURE_2D, texture_handle[TETO]);
-  drawRect(0, 11.35, -0.9, 11, 0.3, 24,0.69,0.69,0.69);
-  glBindTexture(GL_TEXTURE_2D, texture_handle[PAREDE]);
-  drawRect(0, 11.20, -0.9, 11, 0.3, 24,0.74,0.74,0.74);
-
-/*---------------------Parede fundo---------------------------------------*/
-
- glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
-  drawRect(0, 5.60, -11.85, 11, 11.20, 0.3, 1 ,0.98 ,0.98);
-
-/*---------------------parede altar frente-------------------------*/
-//parede altar 1
- glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
-   drawRect(-4.2, 4, -7.85, 2, 8, 0.3,1 ,1, 0.88);
-
-//parede altar 2
- glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
-   drawRect(4.2,4, -7.85, 2, 8, 0.3,1 ,1, 0.88);
-
-//parede altar 3
- glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
-   drawRect(0, 9.60, -7.85, 10.7, 3.20, 0.3,1 ,1, 0.88);
-
- /*---------------------parede altar fundo-------------------------*/
-  glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREALTAR]);
-  drawRect(0, 4.60, -11.2, 3.8, 9.20, 0.3, 0.96, 0.64, 0.38);
-
-/*--------------------------cruz altar------------------------------*/
-   glBindTexture(GL_TEXTURE_2D, texture_handle[CRUZ]);
-   drawRect(0, 6.0, -10.8,0.4, 4, 0.3, 0.42, 0.56, 0.14);
-   drawRect(0, 7.0, -10.8, 2.5, 0.4, 0.3, 0.42, 0.56, 0.14);
-
-/*-----------------------chão altar 1---------------------*/
-   glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREALTAR]);
-   drawRect(0, 0.5, -9.85, 10.7, 0.60, 4.18,0.96, 0.96, 0.96);
-
-/*-----------------------altar---------------------------*/
-
-   glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREPRETO]);
-   drawRect(0, 3, -9.5, 3, 0.30, 2,0.28, 0.24, 0.55);
-
-   drawRect(0, 1.8, -9.5, 2.5, 2.3, 1.5, 0.28, 0.24, 0.55);
-   glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
-   drawRect(-1.25, 1.8, -9, 0.2, 2.3, 0.3, 1, 1, 1);
-   drawRect(1.25, 1.8, -9, 0.2, 2.3, 0.3, 1, 1, 1);
-
-  /*pedestal*/
-
-   glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREALTAR]);
-
-   drawRect(-2.5, 1.3, -5.5, 2, 2.7 , 0.7, 0.96, 0.64, 0.38);
-
-   drawRect(-2.5, 2.5, -5.5, 2.5, 0.2 , 1,0.96, 0.87, 0.7);
-
-/*parede entrada 1*/
-
-   glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
-
-   drawRect(4.7, 3, 9, 1, 6, 0.3,1,1,1);
-   drawRect(-4.7, 3, 9, 1, 6, 0.3,1,1,1);
-
-   drawRect(3.2, 7, 9, 4, 2, 0.3,1,1,1);
-   drawRect(-3.2, 7, 9, 4, 2, 0.3,1,1,1);
-
-   drawRect(2.0, 4, 9, 1, 8, 0.3,1,1,1);
-   drawRect(-2.0, 4, 9, 1, 8, 0.3,1,1,1);
-
-   drawRect(0, 7.5, 9, 3, 1, 0.3,1,1,1);
-
-   //teto
-   glBindTexture(GL_TEXTURE_2D, texture_handle[PISO]);
-   drawRect(0, 8, 10 , 10.7, 0.3, 2.15 ,1,1,1);
-
-   //grade
-   glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
-   drawRect(0, 9, 8.95 , 7.40, 0.2, 0.2 ,0.86 ,0.86, 0.86);
-
-   drawRect(3.4, 8.5 , 8.95 , 0.2, 0.85 ,0.2 , 0.86 ,0.86, 0.86);
-   drawRect(2.4, 8.5 ,8.95 , 0.2, 0.85 ,0.2 , 0.86 ,0.86, 0.86);
-   drawRect(1.4, 8.5 , 8.95 , 0.2, 0.85 ,0.2 , 0.86 ,0.86, 0.86);
-   drawRect(0.4, 8.5 , 8.95 , 0.2, 0.85 ,0.2 ,0.86 ,0.86, 0.86);
-   drawRect(-0.4, 8.5 ,8.95 , 0.2, 0.85 ,0.2 , 0.86 ,0.86, 0.86);
-   drawRect(-1.4, 8.5 , 8.95 , 0.2, 0.85 ,0.2 , 0.86 ,0.86, 0.86);
-   drawRect(-2.4, 8.5 ,8.95 , 0.2, 0.85 ,0.2 , 0.86 ,0.86, 0.86);
-   drawRect(-3.4, 8.5 , 8.95 , 0.2, 0.85 ,0.2 , 0.86 ,0.86, 0.86);
-
-/*parede  esquerda lateral 1*/
-   glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
-   drawRect(-5.35, 5.60, -0.60, 0.3, 11.20, 22.80 ,0.96, 0.77, 0.19);
-
-/*parede  direita lateral 2*/
-
-   drawRect(5.35, 5.60, -0.60, 0.3, 11.20, 22.80, 0.96, 0.77, 0.19);
-
-//parede fachada 1 esquerda
-   drawRect(-2, 2, 11.85, 1, 4, 0.3, 1, 0.84, 0 );
-
-//parede fachada 1 direita
-   drawRect(2, 2, 11.85, 1, 4, 0.3, 1, 0.84, 0);
-
-//parede fachada 1 centro
-   drawRect(0, 3.5, 11.85, 3, 1, 0.3,1,  0.84,  0);
-
-//parede fachada bloco acima da porta 1
-   drawRect(0, 4.20, 11.85, 4.40, 0.40, 0.3 ,1, 1,  1);
-
-//parede fachada bloco acima da porta 2
-   drawRect(0, 4.60, 11.85, 3.80, 0.40, 0.3 ,1, 0.98, 0.98);
-
-//parede fachada bloco acima da porta 3
-   drawRect(0, 5.0, 11.85, 3.20, 0.40, 0.3, 1,  1,  1);
-
-   //parede fachada bloco 1 torre
-   drawRect(0, 9.20, 11.85, 2.60, 8.0, 0.3,1,  0.84,  0);
-
-   //parede fachada bloco torre
-   drawRect(0, 9.20, 11.85, 2.60, 8.0, 0.3 ,1, 0.98, 0.98);
-
-   //parede fachada bloco  acima da torre
-   //glBindTexture(GL_TEXTURE_2D, texture_handle[WALL]);
-   drawRect(0, 13.40, 11.85, 3.20, 0.40, 0.3 ,1,  1,  1);
-
-   // triangulo torre
-   drawTriangle(-1.60, 13.60, 1.60, 13.60, 0, 14.30, 11.85);
-   // cruz torre
-   glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
-   drawRect(0, 15, 11.85, 0.30, 2, 0.3, 1, 1, 1);
-   drawRect(0, 15.5, 11.85, 1, 0.3, 0.3, 1, 1, 1);
-
-/*-----------------------------------------------------------------*/
-   // parede fachada bloco direito profundidade 2
-   glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
-   drawRect(3.5, 2.40, 11.40, 2, 4.80, 0.6, 1, 1, 0);
-
-   // parede fachada bloco esquerdo profundidade 2
-   drawRect(-3.5, 2.40, 11.40, 2, 4.80, 0.6 , 1, 1, 0);
-
-   // parede fachada bloco acima esquerdo profundidade 2
-   drawRect(0, 5.0, 11.55, 8.40, 0.40, 0.3, 1, 1, 1);
-
-   // parede fachada bloco acima esquerdo profundidade 2
-   drawRect(0, 5.40, 11.55, 7.80, 0.40, 0.3, 1, 0.98, 0.98);
-
-   // parede fachada bloco direito profundidade 2 acima 2
-   drawRect(0, 7.40, 11.55, 7.20, 3.60, 0.3, 1, 1, 0);
-
-   // bloco fachada  profundidade 2 acima 2
-   drawRect(0, 9.70, 11.55, 6.40, 1.0, 0.3, 1, 1, 0);
-
-   // bloco fachada  profundidade 2 acima 3
-   drawRect(0, 10.70, 11.55, 5.80, 1.0, 0.3, 1, 1, 0);
-
-   // bloco fachada  profundidade 2 acima 4
-   drawRect(0, 11.70, 11.55, 5.20, 1.0, 0.3, 1, 1, 0);
-
-   // bloco fachada  profundidade 2 acima 4
-   drawRect(0, 12.70, 11.55, 4.60, 1.0, 0.3, 1, 1, 0);
-
-/*------------------------------------------------------------*/
-
-   // parede fachada bloco direito profundidade 3
-   drawRect(0, 8.0, 11.25, 9, 6.40, 0.3, 1, 1, 0);
-
-   // parede fachada bloco direito profundidade 4
-   drawRect(5.0, 5.60, 10.95, 1.0, 11.20, 0.3, 1, 1, 0);
-
-   // parede fachada bloco esquerdo profundidade 4
-   drawRect(-5.0, 5.60, 10.95, 1.0, 11.20, 0.3, 1, 1, 0);
-
-   /*banco*/
-
-    glBindTexture(GL_TEXTURE_2D, texture_handle[MADEIRABANCO]);
-    drawRect(-3, 1, 0 , 4, 0.2 , 1.2, 0.55, 0.34, 0.26);
-
-    drawRect(-3, 1.9, 0.3 , 4, 0.8 , 0.2, 0.55, 0.34, 0.26);
-
-    drawRect(-4.8, 0.4, 0, 0.2, 1, 0.9, 0.59, 0.29, 0);
-    drawRect(-1.2, 0.4, 0, 0.2, 1, 0.9, 0.59, 0.29, 0);
-
-    drawRect(-1.2, 1, 0.3, 0.15, 1, 0.2, 0.59, 0.29, 0);
-    drawRect(-4.8, 1, 0.3, 0.15, 1, 0.2, 0.59, 0.29, 0);
-
-
-   /*mezanino*/
-
-
-
-    drawRect(-4.5, 8, 1.57 , 1.85, 0.3 ,14.56 , 1, 1, 1);
-    drawRect(4.5, 8, 1.57 , 1.85, 0.3 ,14.56 , 1, 1, 1);
-
-    drawRect(3.8, 9 , 1.57 , 0.2, 0.2 ,14.56 , 1, 1, 1);
-
-    drawRect(3.8,8.5 , 7.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , 6.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , 5.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , 4.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , 3.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , 2.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , 1.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , 0.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 ,-0.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , -1.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , -2.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , -3.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , -4.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , -5.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-
-    drawRect(4.8, 9, -5.6 , 1.85, 0.2 ,0.2 , 1, 1, 1);
-
-    drawRect(5.26 ,8.5 , -5.6 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(4.34 ,8.5 , -5.6 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-
-    drawRect(-3.8, 9 , 1.57 , 0.2, 0.2 ,14.56 , 1, 1, 1);
-
-    drawRect(-3.8,8.5 , 7.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , 6.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , 5.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , 4.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , 3.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , 2.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , 1.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , 0.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 ,-0.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , -1.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , -2.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , -3.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , -4.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , -5.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-
-    drawRect(-4.8, 9, -5.6 , 1.85, 0.2 ,0.2 , 1, 1, 1);
-
-    drawRect(-5.26 ,8.5 , -5.6 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-4.34 ,8.5 , -5.6 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-
-    /*Porta*/
+    drawCylinderWithCut(0, 0, 0, 3, 0.3, 0.2);
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[CRUZ]);
     glPushMatrix();
@@ -546,16 +387,16 @@ void inicializa (void) {
 
 
 
-   loadTexture(texture_handle[0], "/home/hyuri/CGprojeto/img/piso.jpg");
-   loadTexture(texture_handle[1], "/home/hyuri/CGprojeto/img/wood.jpg");
-   loadTexture(texture_handle[2], "/home/hyuri/CGprojeto/img/telha02.jpg");
-   loadTexture(texture_handle[3], "/home/hyuri/CGprojeto/img/wall.jpg");
-   loadTexture(texture_handle[4], "/home/hyuri/CGprojeto/img/marmorealtar.jpg");
-   loadTexture(texture_handle[5], "/home/hyuri/CGprojeto/img/marmoremesa.jpg");
-   loadTexture(texture_handle[6], "/home/hyuri/CGprojeto/img/marmorebranco.jpg");
-   loadTexture(texture_handle[7], "/home/hyuri/CGprojeto/img/madeirabanco.jpg");
-   loadTexture(texture_handle[8], "/home/hyuri/CGprojeto/img/metal.jpg");
-   loadTexture(texture_handle[9], "/home/hyuri/CGprojeto/img/madeiraporta.jpg.jpg");
+   loadTexture(texture_handle[0], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/piso.jpg");
+   loadTexture(texture_handle[1], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/wood.jpg");
+   loadTexture(texture_handle[2], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/telha02.jpg");
+   loadTexture(texture_handle[3], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/wall.jpg");
+   loadTexture(texture_handle[4], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/marmorealtar.jpg");
+   loadTexture(texture_handle[5], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/marmoremesa.jpg");
+   loadTexture(texture_handle[6], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/marmorebranco.jpg");
+   loadTexture(texture_handle[7], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/madeirabanco.jpg");
+   loadTexture(texture_handle[8], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/metal.jpg");
+   loadTexture(texture_handle[9], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/madeiraporta.jpg.jpg");
 
 
   glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );

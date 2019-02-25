@@ -15,12 +15,12 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-         mainwindow.cpp\
-        imagem.cpp \
+           mainwindow.cpp\
+          imagem.cpp \
 
 HEADERS  += mainwindow.h \
-    imagem.h \
-    mainwindow.h
+            imagem.h \
+           mainwindow.h
 
 FORMS    += mainwindow.ui
 
@@ -43,7 +43,7 @@ target.path = $$[QT_INSTALL_EXAMPLES]/opengl/2dpainting
 INSTALLS += target
 
 DISTFILES += \
-    /home/hyuri/CGprojeto/img/piso.jpg
+    /home/hyuri/git/projetoCG/IgrejaRioLargo/img/piso.jpg
 
 
 
