@@ -102,17 +102,13 @@ void drawTriangle_fan(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2, GLfloat x3
                        GLfloat x7, GLfloat y7, GLfloat x8, GLfloat y8) {
     glBegin(GL_TRIANGLE_FAN);
             glVertex2f( x1, y1); // primeiro ponto, comum a todos
-            //glVertex2f(-4,-5);
-            //glVertex2f(-6,-3);
             glVertex2f( x2, y2);
             glVertex2f( x3, y3);
             glVertex2f( x4, y4);
             glVertex2f( x5, y5);
             glVertex2f( x6, y6);
             glVertex2f( y8, y7);
-            //glVertex2f( 6,-3);
-            //glVertex2f( 4,-5);
-        glEnd();
+           glEnd();
 }
 
 void drawRect(GLfloat x, GLfloat y, GLfloat z, GLfloat sx, GLfloat sy, GLfloat sz, GLfloat c1, GLfloat c2, GLfloat c3) {
@@ -163,7 +159,7 @@ void drawDoor(){
     glRotatef(doorAngle, 0, 1, 0);
     glTranslatef(-1.5, 0, 0);
     glScalef(3, 3, 0.10);
-    drawRect(0,0,0,1,1,1, 0.8, 0.52, 0.25);
+    drawRect(0,1,0,2,3,1, 0.8, 0.52, 0.25);
   glPopMatrix();
 }
 
@@ -177,254 +173,281 @@ void mouseFunc(int button, int state, int x, int y) {
 
 // Função callback chamada para fazer o desenho
 void desenha(void) {
+
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-/*---------------------Piso---------------------------------------*/
-
   glBindTexture(GL_TEXTURE_2D, texture_handle[PISO]);
-  drawRect(0, 0, 0, 11, 0.3, 24,1,1,1);
-
-/*---------------------Teto---------------------------------------*/
+  drawRect(0, 0, 0, 22, 0.3, 40,1,1,1); // piso igreja
 
   glBindTexture(GL_TEXTURE_2D, texture_handle[TETO]);
-  drawRect(0, 11.35, -0.9, 11, 0.3, 24,0.69,0.69,0.69);
-  glBindTexture(GL_TEXTURE_2D, texture_handle[PAREDE]);
-  drawRect(0, 11.20, -0.9, 11, 0.3, 24,0.74,0.74,0.74);
+  drawRect(0, 22.35, -0.9, 22, 0.3, 40, 0.69,0.69,0.69);// Teto
 
-/*---------------------Parede fundo---------------------------------------*/
+  //glBindTexture(GL_TEXTURE_2D, texture_handle[PAREDE]);
+  //drawRect(0, 11.20, -0.9, 11, 0.3, 24,0.74,0.74,0.74);
 
- glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
-  drawRect(0, 5.60, -11.85, 11, 11.20, 0.3, 1 ,0.98 ,0.98);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
+  drawRect(0, 11.00, -19.85, 22, 22.20, 0.3, 1 ,0.98 ,0.98);//Parede fundo
 
-/*---------------------parede altar frente-------------------------*/
-//parede altar 1
- glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
-   drawRect(-4.2, 4, -7.85, 2, 8, 0.3,1 ,1, 0.88);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
+  drawRect(-10.90, 11.00, -0.60, 0.3, 22.20, 39.35 ,0.96, 0.77, 0.19);//parede esquerda lateral 1
+  //drawRect(10.90, 11.00, -0.60, 0.3, 22.20, 39.85, 0.96, 0.77, 0.19);// parede  direita lateral 2
 
-//parede altar 2
- glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
-   drawRect(4.2,4, -7.85, 2, 8, 0.3,1 ,1, 0.88);
 
-//parede altar 3
- glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
-   drawRect(0, 9.60, -7.85, 10.7, 3.20, 0.3,1 ,1, 0.88);
+  // ar-condicionado
+  drawRect(-8.90, 10.00, -1, 1.5, 0.5, 4.0 ,1, 1, 1);
+  drawRect(8.90, 10.00, -1, 1.5, 0.5, 4.0 ,1, 1, 1);
 
- /*---------------------parede altar fundo-------------------------*/
+/*--------------------------------ALTAR--------------------------------------------------------------------*/
+  glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREALTAR]); // move cruz altar meio
+  drawRect(0, 10.60, -19.70, 6, 19.40, 0.3, 0.96, 0.64, 0.38);
+  drawRect(-4, 5.30, -19.70, 2, 9.0, 0.3, 0.96, 0.64, 0.38);
+  drawRect(4, 5.30, -19.70, 2, 9.0, 0.3, 0.96, 0.64, 0.38);
+
+  drawRect(-9.70, 10.60, -19.0, 2, 19.40, 1.0, 0.96, 0.64, 0.38); // coluna quina altar esquerda
+  drawRect(9.70, 10.60, -19.0, 2, 19.40, 1.0, 0.96, 0.64, 0.38);  // coluna quina altar direita
+
+  glBindTexture(GL_TEXTURE_2D, texture_handle[CRUZ]); // cruz altar
+  drawRect(0, 11.60, -19.55, 0.4, 8, 0.3, 0.42, 0.56, 0.14); // cruz meio
+  drawRect(0, 14.0, -19.55, 3.5, 0.4, 0.3, 0.42, 0.56, 0.14);
+
+  glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
+  drawRect(-9.20, 11.0, -10.0, 2.70, 22.20, 0.3,1 ,1, 0.88); //parede altar esquerda
+  drawRect(9.20, 11.0, -10.0, 2.70, 22.20, 0.3,1 ,1, 0.88); //parede altar esquerda
+  drawRect(0, 19.60, -10.0, 16.60, 5.20, 0.3, 1 ,1, 0.88);   //parede altar cima
+
   glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREALTAR]);
-  drawRect(0, 4.60, -11.2, 3.8, 9.20, 0.3, 0.96, 0.64, 0.38);
+  drawRect(0, 0.5, -15.0, 22.0, 0.60, 9.75, 0.96, 0.96, 0.96); // chão altar
 
-/*--------------------------cruz altar------------------------------*/
-   glBindTexture(GL_TEXTURE_2D, texture_handle[CRUZ]);
-   drawRect(0, 6.0, -10.8,0.4, 4, 0.3, 0.42, 0.56, 0.14);
-   drawRect(0, 7.0, -10.8, 2.5, 0.4, 0.3, 0.42, 0.56, 0.14);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREPRETO]);
+  drawRect(0, 6, -15.0, 6, 0.30, 4, 0.28, 0.24, 0.55); // Mesa altar tampo
+  drawRect(0, 3.0, -15.0, 5.5, 6.0, 3.5, 0.28, 0.24, 0.55); // Mesa altar base
+  glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
+  drawRect(-2.5, 3.0, -13.0, 0.25, 6.0, 0.3, 1, 1, 1); // Mesa altar coluna esquerda
+  drawRect(2.5, 3.0, -13.0, 0.25, 6.0, 0.3, 1, 1, 1); // Mesa altar coluna direita
 
-/*-----------------------chão altar 1---------------------*/
-   glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREALTAR]);
-   drawRect(0, 0.5, -9.85, 10.7, 0.60, 4.18,0.96, 0.96, 0.96);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREALTAR]); // pedestal
+  drawRect(-4.0, 3.0, -7.5, 2.5, 6.0 , 1.0, 0.96, 0.64, 0.38); // base coluna
+  drawRect(-4.0, 5.3, -7.5, 3.0, 0.3 , 1.3, 0.96, 0.87, 0.7); // tampo borda
+/*--------------------------------parede entrada--------------------------------------------------------------------*/
+  glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
+  drawRect(-10.0, 6.0, 13.70, 1.5, 12.0, 0.3,1 ,1, 0.88); //parede entrada esquerda 1
+  drawRect(-5.0, 6.0, 13.70, 1.0, 12.0, 0.3,1 ,1, 0.88); //parede entrada esquerda 2
+  drawRect(10.0, 6.0, 13.70, 1.5, 12.0, 0.3,1 ,1, 0.88); //parede entada direita 1
+  drawRect(5.0, 6.0, 13.70, 1.00, 12.0, 0.3,1 ,1, 0.88); //parede entada direita 1
+  drawRect(0, 13.0, 13.70, 22.0, 2.0, 0.3, 1 ,1, 0.88);   //parede entrada cima
 
-/*-----------------------altar---------------------------*/
+  glBindTexture(GL_TEXTURE_2D, texture_handle[PISO]);
+  drawRect(0, 14, 16.3, 22.0, 0.3, 5.5 ,1,1,1); //teto mezanino entrada cima
 
-   glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREPRETO]);
-   drawRect(0, 3, -9.5, 3, 0.30, 2,0.28, 0.24, 0.55);
 
-   drawRect(0, 1.8, -9.5, 2.5, 2.3, 1.5, 0.28, 0.24, 0.55);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+  drawRect(0, 16.5, 14.0 , 11.0, 0.5, 0.3 ,0.86 ,0.86, 0.86);  //grade mezanino centro
+
+  drawRect(-1.0, 15.20 , 14.0 , 0.3, 2.5 ,0.3 , 0.86 ,0.86, 0.86);
+  drawRect(-2.0, 15.20 , 14.0 , 0.3, 2.5 ,0.3 , 0.86 ,0.86, 0.86);
+  drawRect(-3.0, 15.20 , 14.0 , 0.3, 2.5 ,0.3 , 0.86 ,0.86, 0.86);
+  drawRect(-4.0, 15.20 , 14.0 , 0.3, 2.5 ,0.3 , 0.86 ,0.86, 0.86);
+  drawRect(-5.0, 15.20 , 14.0 , 0.3, 2.5 ,0.3 , 0.86 ,0.86, 0.86);
+  drawRect(0.0, 15.20 , 14.0 , 0.3, 2.5 ,0.3 , 0.86 ,0.86, 0.86);
+  drawRect(1.0, 15.20 , 14.0 , 0.3, 2.5 ,0.3 , 0.86 ,0.86, 0.86);
+  drawRect(2.0, 15.20 , 14.0 , 0.3, 2.5 ,0.3 , 0.86 ,0.86, 0.86);
+  drawRect(3.0, 15.20 , 14.0 , 0.3, 2.5 ,0.3 , 0.86 ,0.86, 0.86);
+  drawRect(4.0, 15.20 , 14.0 , 0.3, 2.5 ,0.3 , 0.86 ,0.86, 0.86);
+  drawRect(5.0, 15.20 , 14.0 , 0.3, 2.5 ,0.3 , 0.86 ,0.86, 0.86);
+
+  glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
+  drawRect(-8.5, 14.0, 8.0 , 5.0, 0.3 ,14 , 1, 1, 1); // teto esquerdo mezanino
+  drawRect(8.5, 14.0, 8.0 , 5.0, 0.3 ,14.0 , 1, 1, 1); // teto direito mezanino
+
+  glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+
+   drawRect(-6.0, 16.5 , 7.5 , 0.5, 0.3 ,13.5 , 1, 1, 1); // grade cima mezanino esquerdo
+   drawRect(-8.5, 16.5, 1.0 ,5.0 , 0.3 ,0.5 , 1, 1, 1);  // grade lateral esquerda mezanino
+
+   drawRect(6.0, 16.5 , 7.5 , 0.5, 0.3 ,13.5 , 1, 1, 1); // grade cima mezanino direito
+   drawRect(8.5, 16.5, 1.0 ,5.0 , 0.3 ,0.5 , 1, 1, 1);  // grade lateral direito mezanino
+
+   drawRect(-8.5 ,15.20 , 1.0 , 0.3, 2.5 ,0.3 , 1, 1, 1);
+   drawRect(-9.5 ,15.20 , 1.0 , 0.3, 2.5 ,0.3 , 1, 1, 1);
+   drawRect(-10.5 ,15.20 , 1.0 , 0.3, 2.5 ,0.3 , 1, 1, 1);
+   drawRect(-7.5 ,15.20 , 1.0 , 0.3, 2.5 ,0.3 , 1, 1, 1);
+   drawRect(-6.5 ,15.20 , 1.0 , 0.3, 2.5 ,0.3 , 1, 1, 1);
+
+   drawRect(-6.0 ,15.20 , 6.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(-6.0 ,15.20 , 5.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(-6.0 ,15.20 , 4.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(-6.0 ,15.20 , 3.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(-6.0 ,15.20 , 2.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(-6.0 ,15.20 , 1.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(-6.0 ,15.20 , 7.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(-6.0 ,15.20 , 8.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(-6.0 ,15.20 , 9.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(-6.0 ,15.20 , 10.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(-6.0 ,15.20 , 11.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(-6.0 ,15.20 , 12.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(-6.0 ,15.20 , 13.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+
+
+   drawRect(8.5 ,15.20 , 1.0 , 0.3, 2.5 ,0.3 , 1, 1, 1);
+   drawRect(9.5 ,15.20 , 1.0 , 0.3, 2.5 ,0.3 , 1, 1, 1);
+   drawRect(10.5 ,15.20 , 1.0 , 0.3, 2.5 ,0.3 , 1, 1, 1);
+   drawRect(7.5 ,15.20 , 1.0 , 0.3, 2.5 ,0.3 , 1, 1, 1);
+   drawRect(6.5 ,15.20 , 1.0 , 0.3, 2.5 ,0.3 , 1, 1, 1);
+
+   drawRect(6.0 ,15.20 , 6.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(6.0 ,15.20 , 5.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(6.0 ,15.20 , 4.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(6.0 ,15.20 , 3.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(6.0 ,15.20 , 2.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(6.0 ,15.20 , 1.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(6.0 ,15.20 , 7.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(6.0 ,15.20 , 8.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(6.0 ,15.20 , 9.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(6.0 ,15.20 , 10.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(6.0 ,15.20 , 11.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(6.0 ,15.20 , 12.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+   drawRect(6.0 ,15.20 , 13.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
+
+
+/*--------------------------------fachada--------------------------------------------------------------------*/
    glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
-   drawRect(-1.25, 1.8, -9, 0.2, 2.3, 0.3, 1, 1, 1);
-   drawRect(1.25, 1.8, -9, 0.2, 2.3, 0.3, 1, 1, 1);
 
-  /*pedestal*/
+   drawRect(-4.0, 5.0, 19.85, 2, 10.0, 0.3, 1, 0.84, 0 );//parede fachada porta esquerda
+   drawRect(4.0, 5.0, 19.85, 2, 10.0, 0.3, 1, 0.84, 0); //parede fachada porta direita
+   drawRect(0, 10.5, 19.85, 10, 3, 0.3,1,  0.84,  0);//parede fachada em  cima da parta centro
 
-   glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREALTAR]);
+   drawRect(0, 12.15, 19.85, 9.50, 0.5, 0.3 ,1, 1,  1);//parede fachada bloco acima da porta 1
+   drawRect(0, 12.6, 19.85, 9.0, 0.5, 0.3 ,1, 0.98, 0.98);//parede fachada bloco acima da porta 2
 
-   drawRect(-2.5, 1.3, -5.5, 2, 2.7 , 0.7, 0.96, 0.64, 0.38);
+   drawRect(0, 22.85, 19.85, 8.75, 20.0, 0.3 ,1,  0.84,  0); //parede fachada torre meio
 
-   drawRect(-2.5, 2.5, -5.5, 2.5, 0.2 , 1,0.96, 0.87, 0.7);
+   drawRect(0, 33.0, 19.85, 8.50, 0.5, 0.3 ,1,  1,  1); //parede fachada bloco  acima da torre
 
-/*parede entrada 1*/
+   // drawTriangle(-4.0, 33.25, 4.0, 33.25, 0, 14.30, 11.85);// triangulo torre
 
-   glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
 
-   drawRect(4.7, 3, 9, 1, 6, 0.3,1,1,1);
-   drawRect(-4.7, 3, 9, 1, 6, 0.3,1,1,1);
+   //glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]); // cruz torre
+   // drawRect(0, 15, 11.85, 0.30, 2, 0.3, 1, 1, 1);
+   //drawRect(0, 15.5, 11.85, 1, 0.3, 0.3, 1, 1, 1);
 
-   drawRect(3.2, 7, 9, 4, 2, 0.3,1,1,1);
-   drawRect(-3.2, 7, 9, 4, 2, 0.3,1,1,1);
+   drawRect(7, 6.5, 19.40, 4, 13.0, 0.6, 1, 1, 0); // parede fachada bloco direito profundidade 2
+   drawRect(-7.0, 6.5, 19.40, 4, 13.0, 0.6 , 1, 1, 0);// parede fachada bloco esquerdo profundidade 2
 
-   drawRect(2.0, 4, 9, 1, 8, 0.3,1,1,1);
-   drawRect(-2.0, 4, 9, 1, 8, 0.3,1,1,1);
+   drawRect(0, 13.30, 19.40, 18.50, 0.50, 0.3, 1, 1, 1);// parede fachada bloco a acima profundidade 2
+   drawRect(0, 13.80, 19.40, 18.0, 0.50, 0.3, 1, 0.98, 0.98);// parede fachada bloco a acima profundidade 2
 
-   drawRect(0, 7.5, 9, 3, 1, 0.3,1,1,1);
+   drawRect(0, 18.20, 19.40, 17.50, 8.40, 0.3, 1, 1, 0);// parede fachada bloco cima profundidade 2 acima 2
 
-   //teto
-   glBindTexture(GL_TEXTURE_2D, texture_handle[PISO]);
-   drawRect(0, 8, 10 , 10.7, 0.3, 2.15 ,1,1,1);
 
-   //grade
-   glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
-   drawRect(0, 9, 8.95 , 7.40, 0.2, 0.2 ,0.86 ,0.86, 0.86);
+   drawRect(0, 22.60, 19.40, 17.0, 0.5, 0.3, 1, 1, 1);// bloco fachada  profundidade 2 acima 2
+   drawRect(0, 23.0, 19.40, 16.50, 0.5, 0.3, 1, 1, 1);// bloco fachada  profundidade 2 acima 3
 
-   drawRect(3.4, 8.5 , 8.95 , 0.2, 0.85 ,0.2 , 0.86 ,0.86, 0.86);
-   drawRect(2.4, 8.5 ,8.95 , 0.2, 0.85 ,0.2 , 0.86 ,0.86, 0.86);
-   drawRect(1.4, 8.5 , 8.95 , 0.2, 0.85 ,0.2 , 0.86 ,0.86, 0.86);
-   drawRect(0.4, 8.5 , 8.95 , 0.2, 0.85 ,0.2 ,0.86 ,0.86, 0.86);
-   drawRect(-0.4, 8.5 ,8.95 , 0.2, 0.85 ,0.2 , 0.86 ,0.86, 0.86);
-   drawRect(-1.4, 8.5 , 8.95 , 0.2, 0.85 ,0.2 , 0.86 ,0.86, 0.86);
-   drawRect(-2.4, 8.5 ,8.95 , 0.2, 0.85 ,0.2 , 0.86 ,0.86, 0.86);
-   drawRect(-3.4, 8.5 , 8.95 , 0.2, 0.85 ,0.2 , 0.86 ,0.86, 0.86);
+   drawRect(0, 24.0, 19.40, 16.0, 1.5, 0.3, 1, 1, 0); // bloco fachada  profundidade 2 acima 4
 
-/*parede  esquerda lateral 1*/
-   glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
-   drawRect(-5.35, 5.60, -0.60, 0.3, 11.20, 22.80 ,0.96, 0.77, 0.19);
+   drawRect(0, 25.0, 19.40, 15.5, 0.5, 0.3, 1, 1, 1); // bloco fachada  profundidade 2 acima 4
+   drawRect(0, 25.3, 19.40, 15.0, 0.5, 0.3, 1, 1, 1);
 
-/*parede  direita lateral 2*/
 
-   drawRect(5.35, 5.60, -0.60, 0.3, 11.20, 22.80, 0.96, 0.77, 0.19);
+   drawRect(-9.60, 10.80, 19.25, 2.7, 21.70, 0.3, 1, 1, 0);// parede fachada bloco direito profundidade 3
+   drawRect(9.60, 10.80, 19.25, 2.7, 21.70, 0.3, 1, 1, 0); // parede fachada bloco esquerdo profundidade 3
 
-//parede fachada 1 esquerda
-   drawRect(-2, 2, 11.85, 1, 4, 0.3, 1, 0.84, 0 );
-
-//parede fachada 1 direita
-   drawRect(2, 2, 11.85, 1, 4, 0.3, 1, 0.84, 0);
-
-//parede fachada 1 centro
-   drawRect(0, 3.5, 11.85, 3, 1, 0.3,1,  0.84,  0);
-
-//parede fachada bloco acima da porta 1
-   drawRect(0, 4.20, 11.85, 4.40, 0.40, 0.3 ,1, 1,  1);
-
-//parede fachada bloco acima da porta 2
-   drawRect(0, 4.60, 11.85, 3.80, 0.40, 0.3 ,1, 0.98, 0.98);
-
-//parede fachada bloco acima da porta 3
-   drawRect(0, 5.0, 11.85, 3.20, 0.40, 0.3, 1,  1,  1);
-
-   //parede fachada bloco 1 torre
-   drawRect(0, 9.20, 11.85, 2.60, 8.0, 0.3,1,  0.84,  0);
-
-   //parede fachada bloco torre
-   drawRect(0, 9.20, 11.85, 2.60, 8.0, 0.3 ,1, 0.98, 0.98);
-
-   //parede fachada bloco  acima da torre
-   //glBindTexture(GL_TEXTURE_2D, texture_handle[WALL]);
-   drawRect(0, 13.40, 11.85, 3.20, 0.40, 0.3 ,1,  1,  1);
-
-   // triangulo torre
-   drawTriangle(-1.60, 13.60, 1.60, 13.60, 0, 14.30, 11.85);
-   // cruz torre
-   glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
-   drawRect(0, 15, 11.85, 0.30, 2, 0.3, 1, 1, 1);
-   drawRect(0, 15.5, 11.85, 1, 0.3, 0.3, 1, 1, 1);
-
-/*-----------------------------------------------------------------*/
-   // parede fachada bloco direito profundidade 2
-   glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
-   drawRect(3.5, 2.40, 11.40, 2, 4.80, 0.6, 1, 1, 0);
-
-   // parede fachada bloco esquerdo profundidade 2
-   drawRect(-3.5, 2.40, 11.40, 2, 4.80, 0.6 , 1, 1, 0);
-
-   // parede fachada bloco acima esquerdo profundidade 2
-   drawRect(0, 5.0, 11.55, 8.40, 0.40, 0.3, 1, 1, 1);
-
-   // parede fachada bloco acima esquerdo profundidade 2
-   drawRect(0, 5.40, 11.55, 7.80, 0.40, 0.3, 1, 0.98, 0.98);
-
-   // parede fachada bloco direito profundidade 2 acima 2
-   drawRect(0, 7.40, 11.55, 7.20, 3.60, 0.3, 1, 1, 0);
-
-   // bloco fachada  profundidade 2 acima 2
-   drawRect(0, 9.70, 11.55, 6.40, 1.0, 0.3, 1, 1, 0);
-
-   // bloco fachada  profundidade 2 acima 3
-   drawRect(0, 10.70, 11.55, 5.80, 1.0, 0.3, 1, 1, 0);
-
-   // bloco fachada  profundidade 2 acima 4
-   drawRect(0, 11.70, 11.55, 5.20, 1.0, 0.3, 1, 1, 0);
-
-   // bloco fachada  profundidade 2 acima 4
-   drawRect(0, 12.70, 11.55, 4.60, 1.0, 0.3, 1, 1, 0);
-
-/*------------------------------------------------------------*/
-
-   // parede fachada bloco direito profundidade 3
-   drawRect(0, 8.0, 11.25, 9, 6.40, 0.3, 1, 1, 0);
-
-   // parede fachada bloco direito profundidade 4
-   drawRect(5.0, 5.60, 10.95, 1.0, 11.20, 0.3, 1, 1, 0);
-
-   // parede fachada bloco esquerdo profundidade 4
-   drawRect(-5.0, 5.60, 10.95, 1.0, 11.20, 0.3, 1, 1, 0);
+   drawRect(0, 22.0, 19.55, 22.00, 1.0, 0.3, 1, 1, 1);// parede fachada bloco esquerdo profundidade 4
 
    /*banco*/
 
-    glBindTexture(GL_TEXTURE_2D, texture_handle[MADEIRABANCO]);
-    drawRect(-3, 1, 0 , 4, 0.2 , 1.2, 0.55, 0.34, 0.26);
+   glBindTexture(GL_TEXTURE_2D, texture_handle[MADEIRABANCO]);
+   drawRect(-6, 3, 0 , 6, 0.5 , 2.5, 0.55, 0.34, 0.26); // acento banco
+   drawRect(-6, 5.0, 1.0 ,6, 2.0 , 0.3, 0.55, 0.34, 0.26); // encosto banco
 
-    drawRect(-3, 1.9, 0.3 , 4, 0.8 , 0.2, 0.55, 0.34, 0.26);
+   drawRect(-4.0, 4.0, 1.0, 0.5, 1.5, 0.3, 0.59, 0.29, 0); // aste esconto banco
+   drawRect(-8.0, 4.0, 1.0, 0.5, 1.5, 0.3, 0.59, 0.29, 0); // aste esconto banco
 
-    drawRect(-4.8, 0.4, 0, 0.2, 1, 0.9, 0.59, 0.29, 0);
-    drawRect(-1.2, 0.4, 0, 0.2, 1, 0.9, 0.59, 0.29, 0);
+   drawRect(-3.5, 1.8, 0, 0.5, 2.5, 2.0, 0.59, 0.29, 0); // pe banco direito
+   drawRect(-3.5, 0.5, 0, 0.5, 1.0, 2.5, 0.55, 0.34, 0.26);
 
-    drawRect(-1.2, 1, 0.3, 0.15, 1, 0.2, 0.59, 0.29, 0);
-    drawRect(-4.8, 1, 0.3, 0.15, 1, 0.2, 0.59, 0.29, 0);
+   drawRect(-8.5, 1.8, 0, 0.5, 2.5, 2.0, 0.59, 0.29, 0);// pe banco esquerdo
+   drawRect(-8.5, 0.5, 0, 0.5, 1.0, 2.5, 0.55, 0.34, 0.26);
+
+   // banco 2
+
+   drawRect(-6, 3, 5 , 6, 0.5 , 2.5, 0.55, 0.34, 0.26); // acento banco
+   drawRect(-6, 5.0, 6.0 ,6, 2.0 , 0.3, 0.55, 0.34, 0.26); // encosto banco
+
+   drawRect(-4.0, 4.0, 6.0, 0.5, 1.5, 0.3, 0.59, 0.29, 0); // aste esconto banco
+   drawRect(-8.0, 4.0, 6.0, 0.5, 1.5, 0.3, 0.59, 0.29, 0); // aste esconto banco
+
+   drawRect(-3.5, 1.8, 5, 0.5, 2.5, 2.0, 0.59, 0.29, 0); // pe banco direito
+   drawRect(-3.5, 0.5, 5, 0.5, 1.0, 2.5, 0.55, 0.34, 0.26);
+
+   drawRect(-8.5, 1.8, 5, 0.5, 2.5, 2.0, 0.59, 0.29, 0);// pe banco esquerdo
+   drawRect(-8.5, 0.5, 5, 0.5, 1.0, 2.5, 0.55, 0.34, 0.26);
+
+   // banco 3
+
+   drawRect(-6, 3, 10 , 6, 0.5 , 2.5, 0.55, 0.34, 0.26); // acento banco
+   drawRect(-6, 5.0, 11 ,6, 2.0 , 0.3, 0.55, 0.34, 0.26); // encosto banco
+
+   drawRect(-4.0, 4.0, 11.0, 0.5, 1.5, 0.3, 0.59, 0.29, 0); // aste esconto banco
+   drawRect(-8.0, 4.0, 11.0, 0.5, 1.5, 0.3, 0.59, 0.29, 0); // aste esconto banco
+
+   drawRect(-3.5, 1.8, 10, 0.5, 2.5, 2.0, 0.59, 0.29, 0); // pe banco direito
+   drawRect(-3.5, 0.5, 10, 0.5, 1.0, 2.5, 0.55, 0.34, 0.26);
+
+   drawRect(-8.5, 1.8, 10, 0.5, 2.5, 2.0, 0.59, 0.29, 0);// pe banco esquerdo
+   drawRect(-8.5, 0.5, 10, 0.5, 1.0, 2.5, 0.55, 0.34, 0.26);
 
 
-   /*mezanino*/
+
+   /*banco*/
+
+   glBindTexture(GL_TEXTURE_2D, texture_handle[MADEIRABANCO]);
+   drawRect(6, 3, 0 , 6, 0.5 , 2.5, 0.55, 0.34, 0.26); // acento banco
+   drawRect(6, 5.0, 1.0 ,6, 2.0 , 0.3, 0.55, 0.34, 0.26); // encosto banco
+
+   drawRect(4.0, 4.0, 1.0, 0.5, 1.5, 0.3, 0.59, 0.29, 0); // aste esconto banco
+   drawRect(8.0, 4.0, 1.0, 0.5, 1.5, 0.3, 0.59, 0.29, 0); // aste esconto banco
+
+   drawRect(3.5, 1.8, 0, 0.5, 2.5, 2.0, 0.59, 0.29, 0); // pe banco direito
+   drawRect(3.5, 0.5, 0, 0.5, 1.0, 2.5, 0.55, 0.34, 0.26);
+
+   drawRect(8.5, 1.8, 0, 0.5, 2.5, 2.0, 0.59, 0.29, 0);// pe banco esquerdo
+   drawRect(8.5, 0.5, 0, 0.5, 1.0, 2.5, 0.55, 0.34, 0.26);
+
+   // banco 2
+
+   drawRect(6, 3, 5 , 6, 0.5 , 2.5, 0.55, 0.34, 0.26); // acento banco
+   drawRect(6, 5.0, 6.0 ,6, 2.0 , 0.3, 0.55, 0.34, 0.26); // encosto banco
+
+   drawRect(4.0, 4.0, 6.0, 0.5, 1.5, 0.3, 0.59, 0.29, 0); // aste esconto banco
+   drawRect(8.0, 4.0, 6.0, 0.5, 1.5, 0.3, 0.59, 0.29, 0); // aste esconto banco
+
+   drawRect(3.5, 1.8, 5, 0.5, 2.5, 2.0, 0.59, 0.29, 0); // pe banco direito
+   drawRect(3.5, 0.5, 5, 0.5, 1.0, 2.5, 0.55, 0.34, 0.26);
+
+   drawRect(8.5, 1.8, 5, 0.5, 2.5, 2.0, 0.59, 0.29, 0);// pe banco esquerdo
+   drawRect(8.5, 0.5, 5, 0.5, 1.0, 2.5, 0.55, 0.34, 0.26);
+
+   // banco 3
+
+   drawRect(6, 3, 10 , 6, 0.5 , 2.5, 0.55, 0.34, 0.26); // acento banco
+   drawRect(6, 5.0, 11 ,6, 2.0 , 0.3, 0.55, 0.34, 0.26); // encosto banco
+
+   drawRect(4.0, 4.0, 11.0, 0.5, 1.5, 0.3, 0.59, 0.29, 0); // aste esconto banco
+   drawRect(8.0, 4.0, 11.0, 0.5, 1.5, 0.3, 0.59, 0.29, 0); // aste esconto banco
+
+   drawRect(3.5, 1.8, 10, 0.5, 2.5, 2.0, 0.59, 0.29, 0); // pe banco direito
+   drawRect(3.5, 0.5, 10, 0.5, 1.0, 2.5, 0.55, 0.34, 0.26);
+
+   drawRect(8.5, 1.8, 10, 0.5, 2.5, 2.0, 0.59, 0.29, 0);// pe banco esquerdo
+   drawRect(8.5, 0.5, 10, 0.5, 1.0, 2.5, 0.55, 0.34, 0.26);
 
 
-
-    drawRect(-4.5, 8, 1.57 , 1.85, 0.3 ,14.56 , 1, 1, 1);
-    drawRect(4.5, 8, 1.57 , 1.85, 0.3 ,14.56 , 1, 1, 1);
-
-    drawRect(3.8, 9 , 1.57 , 0.2, 0.2 ,14.56 , 1, 1, 1);
-
-    drawRect(3.8,8.5 , 7.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , 6.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , 5.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , 4.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , 3.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , 2.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , 1.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , 0.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 ,-0.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , -1.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , -2.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , -3.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , -4.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(3.8,8.5 , -5.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-
-    drawRect(4.8, 9, -5.6 , 1.85, 0.2 ,0.2 , 1, 1, 1);
-
-    drawRect(5.26 ,8.5 , -5.6 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(4.34 ,8.5 , -5.6 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-
-    drawRect(-3.8, 9 , 1.57 , 0.2, 0.2 ,14.56 , 1, 1, 1);
-
-    drawRect(-3.8,8.5 , 7.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , 6.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , 5.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , 4.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , 3.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , 2.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , 1.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , 0.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 ,-0.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , -1.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , -2.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , -3.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , -4.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-3.8,8.5 , -5.56 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-
-    drawRect(-4.8, 9, -5.6 , 1.85, 0.2 ,0.2 , 1, 1, 1);
-
-    drawRect(-5.26 ,8.5 , -5.6 , 0.2, 0.85 ,0.2 , 1, 1, 1);
-    drawRect(-4.34 ,8.5 , -5.6 , 0.2, 0.85 ,0.2 , 1, 1, 1);
 
     /*Porta*/
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[CRUZ]);
     glPushMatrix();
-    glTranslatef(1.5, 1.5, 11.85);
+    glTranslatef(1.5, 1.5, 19.85);
     drawDoor();
 
    glPopMatrix();
