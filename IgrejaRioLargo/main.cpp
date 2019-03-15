@@ -32,7 +32,7 @@
 #define SINO 13
 
 // Camera
-GLdouble phi = M_PI / 2, theta = 0, radius = 15;
+GLdouble phi = M_PI / 2, theta = 0, radius = 85;
 
 GLfloat fAspect;
 
@@ -48,24 +48,6 @@ GLuint texture_handle[10];
 
 GLuint texture_id[25];
 
-//void loadTexture(GLuint texture, const char* filename)
-//{
-//    sf::Image img;
-
-//    img.loadFromFile(filename);
-
-//   glBindTexture(GL_TEXTURE_2D, texture);
-
-//   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-//   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-//   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,img.getSize().x, img.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, img.getPixelsPtr());
-
-
-
-//}
 
 void loadTexture(GLuint texture, const char* filename)
 {
@@ -612,13 +594,16 @@ glBindTexture(GL_TEXTURE_2D, texture_handle[PISO]);
 
    drawRect(0, 22.85, 19.85, 8.75, 20.0, 0.3 ,1,  0.84,  0); //parede fachada torre meio
 
+   drawRect(-2.5, 17.8, 19.7, 2.6, 7.0, 1.3 ,0.19,  0.6,  0.0); //janela esquerda torre
+    drawRect(2.5, 17.8, 19.7, 2.6, 7.0, 1.3 ,0.19,  0.6,  0.0); // janela direita torre
+
    drawRect(0, 33.0, 19.85, 8.50, 0.5, 0.3 ,1,  1,  1); //parede fachada bloco  acima da torre
 
      drawTriangle(0, 36.0, -4, 33.15, 4, 33.15,19.75); // TRIANGULO
 
-     //glBindTexture(GL_TEXTURE_2D, texture_handle[SINO]);
-     drawRect(0, 30, 20, 5, 4, 0.3 ,0,  0, 0); //sino
-     drawRect(0, 30, 19.5, 5, 4, 0.3 ,0,  0, 0); //sino
+     glBindTexture(GL_TEXTURE_2D, texture_handle[SINO]);
+     drawRect(0, 30, 20, 5, 4, 0.3 ,1,  1, 1); //sino
+     drawRect(0, 30, 19.5, 5, 4, 0.3 ,1,  1, 1); //sino
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]); // cruz torre
     drawRect(0, 38, 19.75, 0.5, 4, 0.3, 1, 1, 1);
@@ -632,6 +617,9 @@ glBindTexture(GL_TEXTURE_2D, texture_handle[PISO]);
 
    drawRect(0, 18.20, 19.40, 17.50, 8.40, 0.3, 1, 1, 0);// parede fachada bloco cima profundidade 2 acima 2
 
+   drawRect(-6.3, 17.7, 19.40, 2.6, 6.5, 1 ,0.19,  0.6,  0.0); //janela esquerda profundidade 2
+   drawRect( 6.3, 17.7, 19.40, 2.6, 6.5, 1 ,0.19,  0.6,  0.0); // janela direita profundidade 2
+
 
    drawRect(0, 22.60, 19.40, 17.0, 0.5, 0.3, 1, 1, 1);// bloco fachada  profundidade 2 acima 2
    drawRect(0, 23.0, 19.40, 16.50, 0.5, 0.3, 1, 1, 1);// bloco fachada  profundidade 2 acima 3
@@ -644,6 +632,9 @@ glBindTexture(GL_TEXTURE_2D, texture_handle[PISO]);
 
    drawRect(-9.60, 10.80, 19.25, 2.7, 21.70, 0.3, 1, 1, 0);// parede fachada bloco direito profundidade 3
    drawRect(9.60, 10.80, 19.25, 2.7, 21.70, 0.3, 1, 1, 0); // parede fachada bloco esquerdo profundidade 3
+
+   drawRect(-7, 7.80, 19.40, 2.6, 6.5, 1 ,0.19,  0.6,  0.0); //janela esquerda profundidade 2
+   drawRect( 7, 7.80, 19.40, 2.6, 6.5, 1 ,0.19,  0.6,  0.0); // janela direita profundidade 2
 
    drawRect(0, 22.0, 19.55, 22.00, 1.0, 0.3, 1, 1, 1);// parede fachada bloco esquerdo profundidade 4
 
@@ -876,6 +867,7 @@ void inicializa (void) {
     loadTexture(texture_handle[10], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/tapetev.jpg");
     loadTexture(texture_handle[11], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/porta.jpg");
     loadTexture(texture_handle[12], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/solo.jpg");
+    loadTexture(texture_handle[13], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/sinoo.jpg");
 
   glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 }
