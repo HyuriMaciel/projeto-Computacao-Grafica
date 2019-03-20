@@ -33,6 +33,28 @@
 #define VIDRO 14
 #define CHAO 15
 
+#define VIA1 16
+#define VIA2 17
+#define VIA3 18
+#define VIA4 19
+#define VIA5 20
+#define VIA6 21
+#define VIA7 22
+#define VIA8 23
+#define VIA9 24
+#define VIA10 25
+#define VIA11 26
+#define VIA12 27
+#define VIA13 28
+#define VIA14 29
+#define CALICE 30
+
+#define PISOI  31
+#define PISOEN 32
+#define PAREDEF 33
+
+
+
 // Camera
 GLdouble phi = M_PI / 2, theta = 0, radius = 85;
 
@@ -88,11 +110,14 @@ void drawTriangle(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2, GLfloat x3, GL
 
 
 
+
+
 void drawRect(GLfloat x, GLfloat y, GLfloat z, GLfloat sx, GLfloat sy, GLfloat sz, GLfloat c1, GLfloat c2, GLfloat c3) {
   glPushMatrix();
     glTranslatef(x, y, z);
     glScalef(sx, sy, sz);
     glColor3f(c1, c2, c3);
+     glRotatef(180, 1.0, 0.0, 0.0);
      //glutSolidCube(1);
     glBegin(GL_QUADS);
     // Frente
@@ -143,14 +168,21 @@ void drawDoor(){
 void drawWindown(){
 
 
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+
+    glBindTexture(GL_TEXTURE_2D, texture_handle[CALICE]);
+     drawRect(-2, 7, -14.0, 1, 2, 1, 1, 1, 1);
 
      glBindTexture(GL_TEXTURE_2D, texture_handle[VIDRO]);
-     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-      drawRect(-2.5, 17.8, 19.7, 2.6, 7.0, 1.3 ,116/255, 185/255, 255/255); //janela esquerda torre
-      glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
-      drawRect(-2.5, 17.8, 19.7, 0.3, 7.0, 1.5 ,1.0,  1.0,  1.0);
-      drawRect(-3.9, 17.8, 19.7, 0.3, 7.0, 1.5 ,1.0,  1.0,  1.0);
-      drawRect(-1.2, 17.8, 19.7, 0.3, 7.0, 1.5 ,1.0,  1.0,  1.0);
+
+
+     drawRect(-2.5, 17.8, 19.7, 2.6, 7.0, 1.3 ,116/255, 185/255, 255/255); //janela esquerda torre
+
+     glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+
+     drawRect(-2.5, 17.8, 19.7, 0.3, 7.0, 1.5 ,1.0,  1.0,  1.0);
+     drawRect(-3.9, 17.8, 19.7, 0.3, 7.0, 1.5 ,1.0,  1.0,  1.0);
+     drawRect(-1.2, 17.8, 19.7, 0.3, 7.0, 1.5 ,1.0,  1.0,  1.0);
 
       drawRect(-2.5, 17.8, 19.7, 2.6, 0.3, 1.5 ,1.0,  1.0,  1.0);
       drawRect(-2.5, 21.2, 19.7, 2.6, 0.3, 1.5 ,1.0,  1.0,  1.0);
@@ -466,6 +498,25 @@ void drawGrid(){
 
 
 }
+
+void drawQuadr(){
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[VIA1]);
+    drawRect(-10.50, 9.00, 11.0, 0.3, 3, 2 ,1, 1, 1);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[VIA2]);
+    drawRect(-10.50, 9.00, 8.0, 0.3, 3, 2 ,1, 1, 1);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[VIA3]);
+    drawRect(-10.50, 9.00, 5.0, 0.3, 3, 2 ,1, 1, 1);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[VIA4]);
+    drawRect(-10.50, 9.00, 2.0, 0.3, 3, 2 ,1, 1, 1);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[VIA5]);
+    drawRect(-10.50, 9.00, -1.0, 0.3, 3, 2 ,1, 1, 1);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[VIA6]);
+    drawRect(-10.50, 9.00, -4.0, 0.3, 3, 2 ,1, 1, 1);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[VIA7]);
+    drawRect(-10.50, 9.00, -7.0, 0.3, 3, 2 ,1, 1, 1);
+}
+
 // Função callback chamada para gerenciar eventos do mouse
 void mouseFunc(int button, int state, int x, int y) {
     if (button == GLUT_LEFT_BUTTON)
@@ -497,7 +548,10 @@ void desenha(void) {
   //drawCylinder(GLfloat x, GLfloat y, GLfloat z, GLdouble radius, GLdouble height)
 
   drawWindown();
+  drawQuadr();
+  //glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
   glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
   glBindTexture(GL_TEXTURE_2D, texture_handle[PISO]);
   drawRect(0, 0, 0, 22, 0.3, 40,1,1,1); // piso igreja
   glBindTexture(GL_TEXTURE_2D, texture_handle[TAPETE]);
@@ -510,6 +564,7 @@ void desenha(void) {
   glTexCoord2f(20.0, 20.0);
   glTexCoord2f(22.0, 20.0);
   glTexCoord2f(22.0, 22.0);*/
+  glBindTexture(GL_TEXTURE_2D, texture_handle[PISOEN]);
   drawRect(0, -6.3, 0, 42, 0.3, 80,1,1,1); // piso três 3
 
     // escada entrada
@@ -520,6 +575,8 @@ void desenha(void) {
     drawRect(0, -3.0, 22, 10, 1.0, 4.0,1,1,1);
     drawRect(0, -2.0, 21, 10, 1.0, 2.0,1,1,1);
 
+
+  //glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
   glBindTexture(GL_TEXTURE_2D, texture_handle[TETO]);
   drawRect(0, 22.35, -0.9, 22, 0.3, 40, 0.69,0.69,0.69);// Teto
 
@@ -531,6 +588,9 @@ void desenha(void) {
 
   glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
   drawRect(-10.90, 11.00, -0.60, 0.3, 22.20, 39.35 ,0.96, 0.77, 0.19);//parede esquerda lateral 1
+
+
+
   //drawRect(10.90, 11.00, -0.60, 0.3, 22.20, 39.85, 0.96, 0.77, 0.19);// parede  direita lateral 2
 
   drawGrid();
@@ -585,8 +645,8 @@ drawRect(-5, 0.5, 40, 1.8, 0.3, 1.6, 0.96, 0.77, 0.19);
 
 
   // ar-condicionado
-  drawRect(-8.90, 10.00, -1, 1.5, 0.5, 4.0 ,1, 1, 1);
-  drawRect(8.90, 10.00, -1, 1.5, 0.5, 4.0 ,1, 1, 1);
+  drawRect(-8.90, 13.00, -1, 1.5, 0.5, 4.0 ,1, 1, 1);
+  drawRect(8.90, 13.00, -1, 1.5, 0.5, 4.0 ,1, 1, 1);
 
 /*--------------------------------ALTAR--------------------------------------------------------------------*/
   glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREALTAR]); // move cruz altar meio
@@ -623,6 +683,9 @@ drawRect(-5, 0.5, 40, 1.8, 0.3, 1.6, 0.96, 0.77, 0.19);
   glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREPRETO]);
   drawRect(0, 6, -15.0, 6, 0.30, 4, 0.28, 0.24, 0.55); // Mesa altar tampo
   drawRect(0, 3.0, -15.0, 5.5, 6.0, 3.5, 0.28, 0.24, 0.55); // Mesa altar base
+
+
+
   glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
   drawRect(-2.5, 3.0, -13.0, 0.25, 6.0, 0.3, 1, 1, 1); // Mesa altar coluna esquerda
   drawRect(2.5, 3.0, -13.0, 0.25, 6.0, 0.3, 1, 1, 1); // Mesa altar coluna direita
@@ -741,8 +804,10 @@ drawRect(-5, 0.5, 40, 1.8, 0.3, 1.6, 0.96, 0.77, 0.19);
      drawTriangle(0, 36.0, -4, 33.15, 4, 33.15,19.75); // TRIANGULO
 
      glBindTexture(GL_TEXTURE_2D, texture_handle[SINO]);
+
+     //drawSino(0, 30, 20, 5, 4, 0.3 ,1,  1, 1, 0); //sino
      drawRect(0, 30, 20, 5, 4, 0.3 ,1,  1, 1); //sino
-     drawRect(0, 30, 19.5, 5, 4, 0.3 ,1,  1, 1); //sino
+    // drawRect(0, 30, 19.5, 5, 4, 0.3 ,1,  1, 1); //sino
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]); // cruz torre
     drawRect(0, 38, 19.75, 0.5, 4, 0.3, 1, 1, 1);
@@ -989,7 +1054,7 @@ void inicializa (void) {
 
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-  glGenTextures(20, texture_handle);
+  glGenTextures(40, texture_handle);
 
 
 
@@ -1006,9 +1071,31 @@ void inicializa (void) {
     loadTexture(texture_handle[10], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/tapetev.jpg");
     loadTexture(texture_handle[11], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/porta.jpg");
     loadTexture(texture_handle[12], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/solo.jpg");
-    loadTexture(texture_handle[13], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/sinoo.jpg");
+    loadTexture(texture_handle[13], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/sinoo.png");
     loadTexture(texture_handle[14], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/vidroJ.jpg");
     loadTexture(texture_handle[15], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/chao.jpg");
+
+     loadTexture(texture_handle[16], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via1.jpg");
+     loadTexture(texture_handle[17], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via2.jpg");
+     loadTexture(texture_handle[18], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via3.jpg");
+     loadTexture(texture_handle[19], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via4.jpg");
+     loadTexture(texture_handle[20], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via5.jpg");
+     loadTexture(texture_handle[21], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via6.jpg");
+     loadTexture(texture_handle[22], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via7.jpg");
+
+     loadTexture(texture_handle[23], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via8.jpg");
+     loadTexture(texture_handle[24], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via9.jpg");
+     loadTexture(texture_handle[25], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via10.jpg");
+     loadTexture(texture_handle[26], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via11.jpg");
+     loadTexture(texture_handle[27], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via12.jpg");
+     loadTexture(texture_handle[28], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via13.jpg");
+     loadTexture(texture_handle[29], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via14.jpg");
+     loadTexture(texture_handle[30], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/calice.jpg");
+
+     loadTexture(texture_handle[31], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/pisoIgraja.jpg");
+     loadTexture(texture_handle[32], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/pisoentrada.jpg");
+     loadTexture(texture_handle[33], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/parede.png");
+
   glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 }
 
