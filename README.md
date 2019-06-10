@@ -12,13 +12,13 @@ Organização das pastas:
     
     -holla;
     
-    - Flor de Lotus
+    - Flor de Lotus;
     
-    -Flor de Abril
+    -Flor de Abril;
     
     -tux.
     
-    - IgrejaRioLargo (projeto de modelagem):
+ - IgrejaRioLargo (projeto de modelagem):
     
        -img (pasta com as imagens);
        
