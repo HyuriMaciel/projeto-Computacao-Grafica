@@ -5,6 +5,10 @@
 
 static int shoulder = 0, sen = 0;
 
+
+
+
+
 void init(void){
   glClearColor (0.0,0,0,0);
 }
@@ -39,22 +43,22 @@ void display(void){
 
   glPushMatrix();
   glBegin(GL_TRIANGLES);
-        glColor3f(1.0f, 0.0f, 0.0f); // vermelho
+        glColor3f(1.0, 0.0, 0.0); // vermelho
         glVertex2f(-1, 0);
         glVertex2f(0, 2);
         glVertex2f(-2, 2);
 
-        glColor3f(1.0f, 0.0f, 0.0f); // vermelho 
+        glColor3f(1.0, 1.0, 0.0); // vermelho 
         glVertex2f(-1, 0);
         glVertex2f(-2, -2);
         glVertex2f(0, -2);
 
-        glColor3f(0.0f, 1.0f, 0.0f); // verde
+        glColor3f(1.0, 1.0, 1.0); // verde
         glVertex2f(-1, 0);
         glVertex2f(-3, 1);
         glVertex2f(-3, -1);        
 
-        glColor3f(0.0f, 1.0f, 0.0f); // verde
+        glColor3f(0.0, 0.0, 1.0); // verde
         glVertex2f(-1, 0);
         glVertex2f(1, 1);
         glVertex2f(1, -1);
@@ -102,7 +106,7 @@ void MouseClick (int button, int state, int x, int y)
 { 
     switch (button) 
     { 
-        case GLUT_LEFT_BUTTON:  sen = (sen + 5) % 360;
+        case GLUT_LEFT_BUTTON:  sen = (sen + 45) % 360;
                                  glutPostRedisplay();
 
                                break; 
