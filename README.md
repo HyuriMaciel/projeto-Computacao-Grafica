@@ -5,16 +5,23 @@
 
 Organização das pastas:
   - trabalhos (pequenos projetos usando opengl):
+  
     -braço;
     
     -catavento;
     
     -holla;
     
+    - Flor de Lotus
+    
+    -Flor de Abril
+    
     -tux.
     
     - IgrejaRioLargo (projeto de modelagem):
+    
        -img (pasta com as imagens);
+       
        -SFML-master(biblioteca necessária para uso de texturas)
 
 <h2>Para rodar o projeto IgrejaRioLargo deve-se fazer:</h2>
