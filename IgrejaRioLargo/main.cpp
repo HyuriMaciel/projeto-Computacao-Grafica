@@ -58,6 +58,8 @@
 #define PISO2 35
 #define PISO3 36
 #define FERROGRADE 37
+#define AR 38
+#define JESUS 39
 
 
 // Camera
@@ -167,6 +169,11 @@ void drawDoor(){
     glPopMatrix();
 }
 
+//parede direita
+void paredeD(){
+
+}
+
 // Janelas
 void drawWindown(){
 
@@ -246,7 +253,7 @@ void drawWindown(){
     drawRect( 7, 9.5, 19.40, 2.6, 0.2, 1.5,1, 1, 1);
     drawRect( 7, 6.3, 19.40, 2.6, 0.2, 1.5,1, 1, 1);
 
-    // drawRect(-10.90, 11.00, -0.60, 0.3, 22.20, 39.35 ,0.96, 0.77, 0.19);//parede esquerda lateral 1
+    // Janelas lateral esquerda
     glBindTexture(GL_TEXTURE_2D,texture_handle[VIDRO]);
     drawRect( -10.90, 17.80, 15, 1, 7 , 2.6 ,116/255, 185/255, 255/255);
     glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
@@ -294,6 +301,55 @@ void drawWindown(){
     drawRect(-10.90, 14.20, -3, 1.8, 0.2, 2.7,1, 1, 1);
     drawRect(-10.90, 21.30, -3, 1.8, 0.2, 2.7,1, 1, 1);
     drawRect(-10.90, 19.60, -3, 1.8, 0.2, 2.7,1, 1, 1);
+
+    // Janelas lateral direita
+    glBindTexture(GL_TEXTURE_2D,texture_handle[VIDRO]);
+    drawRect( 10.90, 17.80, 15, 1, 7 , 2.6 ,116/255, 185/255, 255/255);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+    drawRect(10.90, 17.80, 15, 1.5, 7,   0.2,1, 1, 1);
+    drawRect(10.90, 17.80, 16.5, 1.5, 7, 0.2,1, 1, 1);
+    drawRect(10.90, 17.80, 13.5, 1.5, 7, 0.2,1, 1, 1);
+    drawRect(10.90, 17.80, 15, 1.8, 0.2, 2.5,1, 1, 1);
+    drawRect(10.90, 16.00, 15, 1.8, 0.2, 2.7,1, 1, 1);
+    drawRect(10.90, 14.20, 15, 1.8, 0.2, 2.7,1, 1, 1);
+    drawRect(10.90, 21.30, 15, 1.8, 0.2, 2.7,1, 1, 1);
+    drawRect(10.90, 19.60, 15, 1.8, 0.2, 2.7,1, 1, 1);
+
+    glBindTexture(GL_TEXTURE_2D,texture_handle[VIDRO]);
+    drawRect(10.90, 17.80, 9, 1, 7 , 2.6 ,116/255, 185/255, 255/255);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+    drawRect(10.90, 17.80, 9, 1.5, 7,   0.2,1, 1, 1);
+    drawRect(10.90, 17.80, 10.5, 1.5, 7, 0.2,1, 1, 1);
+    drawRect(10.90, 17.80, 7.5, 1.5, 7, 0.2,1, 1, 1);
+    drawRect(10.90, 17.80, 9, 1.8, 0.2, 2.5,1, 1, 1);
+    drawRect(10.90, 16.00, 9, 1.8, 0.2, 2.7,1, 1, 1);
+    drawRect(10.90, 14.20, 9, 1.8, 0.2, 2.7,1, 1, 1);
+    drawRect(10.90, 21.30, 9, 1.8, 0.2, 2.7,1, 1, 1);
+    drawRect(10.90, 19.60, 9, 1.8, 0.2, 2.7,1, 1, 1);
+
+    glBindTexture(GL_TEXTURE_2D,texture_handle[VIDRO]);
+    drawRect(10.90, 17.80, 3, 1, 7 , 2.6 ,116/255, 185/255, 255/255);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+    drawRect(10.90, 17.80, 3, 1.5, 7,   0.2,1, 1, 1);
+    drawRect(10.90, 17.80, 4.5, 1.5, 7, 0.2,1, 1, 1);
+    drawRect(10.90, 17.80, 1.5, 1.5, 7, 0.2,1, 1, 1);
+    drawRect(10.90, 17.80, 3, 1.8, 0.2, 2.5,1, 1, 1);
+    drawRect(10.90, 16.00, 3, 1.8, 0.2, 2.7,1, 1, 1);
+    drawRect(10.90, 14.20, 3, 1.8, 0.2, 2.7,1, 1, 1);
+    drawRect(10.90, 21.30, 3, 1.8, 0.2, 2.7,1, 1, 1);
+    drawRect(10.90, 19.60, 3, 1.8, 0.2, 2.7,1, 1, 1);
+
+    glBindTexture(GL_TEXTURE_2D,texture_handle[VIDRO]);
+    drawRect(10.90, 17.80, -3, 1, 7 , 2.6 ,116/255, 185/255, 255/255);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+    drawRect(10.90, 17.80, -3, 1.5, 7,   0.2,1, 1, 1);
+    drawRect(10.90, 17.80, -1.5, 1.5, 7, 0.2,1, 1, 1);
+    drawRect(10.90, 17.80, -4.5, 1.5, 7, 0.2,1, 1, 1);
+    drawRect(10.90, 17.80, -3, 1.8, 0.2, 2.5,1, 1, 1);
+    drawRect(10.90, 16.00, -3, 1.8, 0.2, 2.7,1, 1, 1);
+    drawRect(10.90, 14.20, -3, 1.8, 0.2, 2.7,1, 1, 1);
+    drawRect(10.90, 21.30, -3, 1.8, 0.2, 2.7,1, 1, 1);
+    drawRect(10.90, 19.60, -3, 1.8, 0.2, 2.7,1, 1, 1);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 }
@@ -530,20 +586,6 @@ void drawAltar(){
 
     // glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 
-    glBindTexture(GL_TEXTURE_2D, texture_handle[MADERIALTAR1]); // move cruz altar meio
-    drawRect(0, 10.60, -19.70, 6, 19.40, 0.3, 0.96, 0.64, 0.38);
-
-    drawRect(-4, 5.30, -19.70, 2, 9.0, 0.3, 0.96, 0.64, 0.38);
-    drawTriangle(-5, 9.7, -3, 9.7, -4, 12 ,-19.5);
-    drawRect(4, 5.30, -19.70, 2, 9.0, 0.3, 0.96, 0.64, 0.38);
-    drawTriangle(5, 9.7, 3, 9.7, 4, 12 ,-19.5);
-
-    drawRect(-9.70, 10.60, -19.0, 2, 19.40, 1.0, 0.96, 0.64, 0.38); // coluna quina altar esquerda
-    drawRect(9.70, 10.60, -19.0, 2, 19.40, 1.0, 0.96, 0.64, 0.38);  // coluna quina altar direita
-
-    glBindTexture(GL_TEXTURE_2D, texture_handle[CRUZ]); // cruz altar
-    drawRect(0, 11.60, -19.55, 0.4, 8, 0.3, 0.42, 0.56, 0.14); // cruz meio
-    drawRect(0, 14.0, -19.55, 3.5, 0.4, 0.3, 0.42, 0.56, 0.14);
 
 
 }
@@ -566,6 +608,22 @@ void drawQuadr(){
     drawRect(-10.50, 9.00, -7.0, 0.3, 3, 2 ,1, 1, 1);
 
 
+    glBindTexture(GL_TEXTURE_2D, texture_handle[VIA1]);
+    drawRect(10.50, 9.00, 11.0, 0.3, 3, 2 ,1, 1, 1);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[VIA2]);
+    drawRect(10.50, 9.00, 8.0, 0.3, 3, 2 ,1, 1, 1);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[VIA3]);
+    drawRect(10.50, 9.00, 5.0, 0.3, 3, 2 ,1, 1, 1);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[VIA4]);
+    drawRect(10.50, 9.00, 2.0, 0.3, 3, 2 ,1, 1, 1);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[VIA5]);
+    drawRect(10.50, 9.00, -1.0, 0.3, 3, 2 ,1, 1, 1);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[VIA6]);
+    drawRect(10.50, 9.00, -4.0, 0.3, 3, 2 ,1, 1, 1);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[VIA7]);
+    drawRect(10.50, 9.00, -7.0, 0.3, 3, 2 ,1, 1, 1);
+
+
     glBindTexture(GL_TEXTURE_2D, texture_handle[PISO2]);
     drawRect(0, 0, 0, 22, 0.3, 40,1,1,1); // piso igreja
     glBindTexture(GL_TEXTURE_2D, texture_handle[PISO3]);
@@ -577,9 +635,21 @@ void drawObj(){
 
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 
-
     glBindTexture(GL_TEXTURE_2D, texture_handle[TAPETE]);
     drawRect(0, 0.15, 2, 5.0, 0.3, 22, 0.86,0.07,0.23); //tapete
+
+    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]); // cruz torre
+    drawRect(0, 38, 19.75, 0.5, 4, 0.3, 1, 1, 1);
+    drawRect(0, 39, 19.75, 3 , 0.3, 0.3, 1, 1, 1);
+
+
+    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]); // cruz torre
+    drawRect(0, 20.5, 20, 0.6, 10, 0.5 ,1,  1,  1); // cruz torre
+    drawRect(0, 24, 20, 4, 0.5, 0.5 ,1,  1,  1); // cruz torre
+
+
+
+
 
 
     /*banco*/
@@ -676,10 +746,16 @@ void drawObj(){
 }
 
 void drawSino(){
+    glBindTexture(GL_TEXTURE_2D, texture_handle[PAREDEF]);
+    drawRect(-2.7, 30, 19.7, 1, 4, 1 ,1,  1, 1);
+    drawRect(2.7, 30, 19.7, 1, 4, 1 ,1,  1, 1);
+    drawRect(0, 32, 19.7, 6.5, 0.3, 1 ,1,  1, 1);
+    drawRect(0, 28, 19.7, 6.5, 0.3, 1 ,1,  1, 1);
+
     glBindTexture(GL_TEXTURE_2D, texture_handle[SINO]);
     // glDisable(GL_BLEND);
-
     drawRect(0, 30, 20, 5, 4, 0.3 ,1,  1, 1); //sino
+    drawRect(0, 30, 19.7, 5, 4, 0.3 ,1,  1, 1);
 
 }
 
@@ -731,27 +807,18 @@ void desenha(void) {
     drawRect(0, -3.0, 22, 10, 1.0, 4.0,1,1,1);
     drawRect(0, -2.0, 21, 10, 1.0, 2.0,1,1,1);
 
-
     glBindTexture(GL_TEXTURE_2D, texture_handle[TETO]);
     drawRect(0, 22.35, -0.9, 22, 0.3, 40, 0.69,0.69,0.69);// Teto
 
-    //glBindTexture(GL_TEXTURE_2D, texture_handle[PAREDE]);
-    //drawRect(0, 11.20, -0.9, 11, 0.3, 24,0.74,0.74,0.74);
-
-    glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
-    drawRect(0, 11.00, -19.85, 22, 22.20, 0.3, 1 ,0.98 ,0.98);//Parede fundo
-
-    glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
-    drawRect(-10.90, 11.00, -0.60, 0.3, 22.20, 39.35 ,0.96, 0.77, 0.19);//parede esquerda lateral 1
-
-
-
-    //drawRect(10.90, 11.00, -0.60, 0.3, 22.20, 39.85, 0.96, 0.77, 0.19);// parede  direita lateral 2
-
+    glBindTexture(GL_TEXTURE_2D, texture_handle[PAREDEF]);
+    drawRect(0, 11.00, -19.85, 22, 22.20, 0.3, 1, 1, 0);//Parede fundo
+    drawRect(-10.90, 11.00, -0.60, 0.3, 22.20, 39.35 ,1, 1, 0);//parede esquerda lateral 1
+    // COMENTAR====================================================================
+    drawRect(10.90, 11.00, -0.60, 0.3, 22.20, 39.35 ,1, 1, 0);//parede esquerda lateral 1
 
     // mureta
-    glBindTexture(GL_TEXTURE_2D, texture_handle[PAREDE]);
-    drawRect(-20.9, -4.3, 0, 0.3, 4.0, 80.5, 1 ,0.98 ,0.98);// muro lateral esquerdo
+    glBindTexture(GL_TEXTURE_2D, texture_handle[PAREDEF]);
+    drawRect(-20.9, -4.3, 0, 0.3, 4.0, 80.5, 1, 1, 0);// muro lateral esquerdo
 
     drawRect(-20.9, -1.0, 39.5, 0.3, 3.0, 1.0, 1 ,0.98 ,0.98);
     drawRect(-20.9, 0.5, 39.5, 0.8, 0.3, 1.8, 0.96, 0.77, 0.19);
@@ -764,7 +831,7 @@ void desenha(void) {
     drawRect(-20.9, 0.5, -39.5, 0.8, 0.3, 1.8, 0.96, 0.77, 0.19);
 
 
-    drawRect(20.9, -4.3, 0, 0.3, 4.0, 80.5, 1 ,0.98 ,0.98);// muro lateral direito
+    drawRect(20.9, -4.3, 0, 0.3, 4.0, 80.5, 1, 1, 0);// muro lateral direito
     drawRect(20.9, -1.0, 39.5, 0.3, 3.0, 1.0, 1 ,0.98 ,0.98);
     drawRect(20.9, 0.5, 39.5, 0.8, 0.3, 1.8, 0.96, 0.77, 0.19);
     drawRect(20.9, 0.8, 39.5, 0.5, 0.3, 0.7, 1 ,0.98 ,0.98);
@@ -777,18 +844,16 @@ void desenha(void) {
     drawRect(20.9, -1.0, -39.5, 0.3, 3.0, 1.0, 1 ,0.98 ,0.98);
     drawRect(20.9, 0.5, -39.5, 0.8, 0.3, 1.8, 0.96, 0.77, 0.19);
 
-   drawRect(-20.9, -1.0, 0.0, 0.3, 3.0, 1.0, 1 ,0.98 ,0.98);
+    drawRect(-20.9, -1.0, 0.0, 0.3, 3.0, 1.0, 1 ,0.98 ,0.98);
 
-
-    drawRect(-12.5, -4.3, 40.0, 16.0, 4.0, 0.3, 1 ,0.98 ,0.98);// muro frente esquerda
+    drawRect(-12.5, -4.3, 40.0, 16.0, 4.0, 0.3, 1, 1, 0);// muro frente esquerda
     drawRect(-5.0, -1.0, 40, 1.0, 3.0, 1, 1 ,0.98 ,0.98);
     drawRect(-5, 0.5, 40, 1.8, 0.3, 1.6, 0.96, 0.77, 0.19);
     drawRect(-5, 0.8, 40, 0.5, 0.3, 0.7, 1 ,0.98 ,0.98);
 
-
     drawRect(-20.0, -1.0, 40, 1.0, 3.0, 1, 1 ,0.98 ,0.98);
 
-    drawRect(12.5, -4.3, 40.0, 16.0, 4.0, 1, 1 ,0.98 ,0.98);// muro frente direito
+    drawRect(12.5, -4.3, 40.0, 16.0, 4.0, 1, 1, 1, 0);// muro frente direito
     drawRect(5.0, -1.0, 40, 1.0, 3.0, 1, 1 ,0.98 ,0.98);
 
     drawRect(5, 0.5, 40, 1.8, 0.3, 1.6, 0.96, 0.77, 0.19);
@@ -796,29 +861,25 @@ void desenha(void) {
 
     drawRect(20.0, -1.0, 40, 1.0, 3.0, 1, 1 ,0.98 ,0.98);
 
+    drawRect(0, -4.3, -40.0, 42, 4.0, 0.3, 1, 1, 0);// muro trass
 
-    drawRect(0, -4.3, -40.0, 42, 4.0, 0.3, 1 ,0.98 ,0.98);// muro trass
 
- glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
     // ar-condicionado
-    drawRect(-8.90, 13.00, -1, 1.5, 0.5, 4.0 ,1, 1, 1);
-    drawRect(8.90, 13.00, -1, 1.5, 0.5, 4.0 ,1, 1, 1);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[AR]);
+    drawRect(-8.90, 12.50, -1, 0.5, 2, 4.0 ,1, 1, 1);
+    drawRect(8.90, 12.50, -1, 0.5, 2, 4.0 ,1, 1, 1);
+
 
     /*--------------------------------ALTAR--------------------------------------------------------------------*/
 
-
-    glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[PAREDEF]);
     drawRect(-9.20, 11.0, -10.0, 2.70, 22.20, 0.3,1 ,1, 0.88); //parede altar esquerda
-
     drawRect(-7.5, 8.5, -10.0, 1.0, 16.5,0.3,  0.85, 0.43, 0.57); // coluna rosa
-
-    drawRect(9.20, 11.0, -10.0, 2.70, 22.20, 0.3,1 ,1, 0.88); //parede altar esquerda
+    drawRect(9.20, 11.0, -10.0, 2.70, 22.20, 0.3,1 ,1, 0.88); //parede altar direita
     drawRect(7.5, 8.5, -10.0, 1.0, 16.5,0.3,  0.85, 0.43, 0.57); // coluna rosa
     drawRect(0, 19.60, -10.0, 16.60, 5.20, 0.3, 1 ,1, 0.88);   //parede altar cima
 
     drawRect(0, 16.50, -10.0, 15.5, 1.0, 0.3,  0.85, 0.43, 0.57); //coluna cima rosa
-
-
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREALTAR]);
     drawRect(0, 0.5, -15.0, 22.0, 0.60, 9.75, 0.96, 0.96, 0.96); // chão altar
@@ -827,8 +888,6 @@ void desenha(void) {
     drawRect(0, 6, -15.0, 6, 0.30, 4, 0.28, 0.24, 0.55); // Mesa altar tampo
     drawRect(0, 3.0, -15.0, 5.5, 6.0, 3.5, 0.28, 0.24, 0.55); // Mesa altar base
 
-
-
     glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
     drawRect(-2.5, 3.0, -13.0, 0.25, 6.0, 0.3, 1, 1, 1); // Mesa altar coluna esquerda
     drawRect(2.5, 3.0, -13.0, 0.25, 6.0, 0.3, 1, 1, 1); // Mesa altar coluna direita
@@ -836,8 +895,26 @@ void desenha(void) {
     glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREALTAR]); // pedestal
     drawRect(-4.0, 3.0, -7.5, 2.5, 6.0 , 1.0, 0.96, 0.64, 0.38); // base coluna
     drawRect(-4.0, 5.3, -7.5, 3.0, 0.3 , 1.3, 0.96, 0.87, 0.7); // tampo borda
+
+
+    glBindTexture(GL_TEXTURE_2D, texture_handle[MADERIALTAR1]); // move cruz altar meio
+    drawRect(0, 10.60, -19.70, 6, 19.40, 0.3, 0.96, 0.64, 0.38);
+
+    drawRect(-4, 5.30, -19.70, 2, 9.0, 0.3, 0.96, 0.64, 0.38);
+    drawTriangle(-5, 9.7, -3, 9.7, -4, 12 ,-19.5);
+    drawRect(4, 5.30, -19.70, 2, 9.0, 0.3, 0.96, 0.64, 0.38);
+    drawTriangle(5, 9.7, 3, 9.7, 4, 12 ,-19.5);
+
+    drawRect(-9.70, 10.60, -19.0, 2, 19.40, 1.0, 0.96, 0.64, 0.38); // coluna quina altar esquerda
+    drawRect(9.70, 10.60, -19.0, 2, 19.40, 1.0, 0.96, 0.64, 0.38);  // coluna quina altar direita
+
+    glBindTexture(GL_TEXTURE_2D, texture_handle[JESUS]); // cruz altar
+    drawRect(0, 11.60, -19.50, 5, 8, 0.3,  0.96, 0.64, 0.38);
+
+
+
     /*--------------------------------parede entrada--------------------------------------------------------------------*/
-    glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[PAREDEF]);
     drawRect(-10.0, 6.0, 13.70, 1.5, 12.0, 0.3,1 ,1, 0.88); //parede entrada esquerda 1
     drawRect(-9.0, 6.0, 13.70, 1.0, 12.0,0.3,  0.85, 0.43, 0.57); // coluna rosa
     drawRect(-5.0, 6.0, 13.70, 1.0, 12.0, 0.3,1 ,1, 0.88); //parede entrada esquerda 2
@@ -852,7 +929,6 @@ void desenha(void) {
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[PISO]);
     drawRect(0, 14, 16.3, 22.0, 0.3, 5.5 ,1,1,1); //teto mezanino entrada cima
-
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
     drawRect(0, 16.5, 14.0 , 11.0, 0.5, 0.3 ,0.86 ,0.86, 0.86);  //grade mezanino centro
@@ -922,7 +998,6 @@ void desenha(void) {
     drawRect(6.0 ,15.20 , 12.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
     drawRect(6.0 ,15.20 , 13.5 , 0.3, 2.5 ,0.3 ,0.86 ,0.86, 0.86);
 
-
     /*--------------------------------fachada--------------------------------------------------------------------*/
     glBindTexture(GL_TEXTURE_2D, texture_handle[PAREDEF]);
 
@@ -935,18 +1010,10 @@ void desenha(void) {
 
     drawRect(0, 22.85, 19.85, 8.75, 20.0, 0.3 ,1,  0.84,  0); //parede fachada torre meio
 
-    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]); // cruz torre
-    drawRect(0, 20.5, 20, 0.6, 10, 0.5 ,1,  1,  1); // cruz torre
-    drawRect(0, 24, 20, 4, 0.5, 0.5 ,1,  1,  1); // cruz torre
-
     glBindTexture(GL_TEXTURE_2D, texture_handle[PAREDEF]);
     drawRect(0, 33.0, 19.85, 8.50, 0.5, 0.3 ,1,  1,  1); //parede fachada bloco  acima da torre
     drawTriangle(0, 36.0, -4, 33.15, 4, 33.15,19.75); // TRIANGULO
 
-
-    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]); // cruz torre
-    drawRect(0, 38, 19.75, 0.5, 4, 0.3, 1, 1, 1);
-    drawRect(0, 39, 19.75, 3 , 0.3, 0.3, 1, 1, 1);
     glBindTexture(GL_TEXTURE_2D, texture_handle[PAREDEF]);
     drawRect(7, 6.5, 19.40, 4, 13.0, 0.6, 1, 1, 0); // parede fachada bloco direito profundidade 2
     drawRect(-7.0, 6.5, 19.40, 4, 13.0, 0.6 , 1, 1, 0);// parede fachada bloco esquerdo profundidade 2
@@ -964,13 +1031,10 @@ void desenha(void) {
     drawRect(0, 25.0, 19.40, 15.5, 0.5, 0.3, 1, 1, 1); // bloco fachada  profundidade 2 acima 4
     drawRect(0, 25.3, 19.40, 15.0, 0.5, 0.3, 1, 1, 1);
 
-
     drawRect(-9.60, 10.80, 19.25, 2.7, 21.70, 0.3, 1, 1, 0);// parede fachada bloco direito profundidade 3
     drawRect(9.60, 10.80, 19.25, 2.7, 21.70, 0.3, 1, 1, 0); // parede fachada bloco esquerdo profundidade 3
 
     drawRect(0, 22.0, 19.55, 22.00, 1.0, 0.3, 1, 1, 1);// parede fachada bloco esquerdo profundidade 4
-
-
 
     /*Porta*/
 
@@ -1064,7 +1128,7 @@ void inicializa (void) {
 
     GLfloat luzAmbiente[4] = {0.3, 0.3, 0.3, 1.0};
     GLfloat luzDifusa[4]={0.4, 0.4, 0.4, 1.0};
-    GLfloat posicaoLuz[4]={0.0, 20.0, 30.0, 1.0};
+    GLfloat posicaoLuz[4]={40, 20.0, 30.0, 1.0};
 
     glShadeModel(GL_SMOOTH);
 
@@ -1140,6 +1204,8 @@ void inicializa (void) {
     loadTexture(texture_handle[35], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/piso2.png");
     loadTexture(texture_handle[36], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/piso3.png");
     loadTexture(texture_handle[37], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/ferrograde.jpg");
+    loadTexture(texture_handle[38], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/ar.png");
+    loadTexture(texture_handle[39], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/jesus.png");
     glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 }
 
