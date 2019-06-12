@@ -4,19 +4,17 @@
 <h1>Projetos utilizando a biblioteca OPENGL</h1>
 
 Organização das pastas:
-  - trabalhos (pequenos projetos usando opengl):
-  
-    -braço;
-    
+  - trabalhos (pequenos projetos usando opengl):  
+       
     -catavento;
     
     -holla;
     
-    - Flor de Lotus;
+    -Flor de Lotus;
     
-    -Flor de Abril;
+    -Flor de Abril.
     
-    -tux.
+   
     
  - IgrejaRioLargo (projeto de modelagem):
     
@@ -28,5 +26,5 @@ Organização das pastas:
 
 Orientações:
 
-  - mudar o diretorio das imagens;
-  - adicionar a biblioteca SFML : https://www.sfml-dev.org/tutorials/2.5/start-linux.php
+  -mudar o diretorio das imagens;
+  -adicionar a biblioteca SFML : https://www.sfml-dev.org/tutorials/2.5/start-linux.php
