@@ -50,23 +50,12 @@ void keyboard (unsigned char key, int x, int y){
   }
 }
 
-void D(){
-
-  rAux = r; gAux = g; bAux = b;
-  r = r3 ; g = g3; b = b3;
-  r1 = rAux; g1 = gAux; b1 = bAux;
-  
-                                
-
-
-}
-
 void MouseClick (int button, int state, int x, int y) 
 { 
 
 
   if (button == GLUT_LEFT_BUTTON){
-    D();
+    sen = (sen + 5) % 360;
     glutPostRedisplay();
 
 
