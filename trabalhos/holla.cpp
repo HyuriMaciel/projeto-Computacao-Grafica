@@ -7,11 +7,17 @@
 float h0 = 0;
 float h1 = 0;
 float h2 = 0;
+float h3 = 0;
+float h4 = 0;
+
 float speed = 1.5;
+int sen   = 0 ;
+int sen1  = 0 ;
+int sen2  = 0 ;
+int sen3  = 0 ;
+int sen4  = 0 ;
 
-void timerUp(int value);
-void timerDown(int value);
-
+void up(int value);
 // Função callback chamada para fazer o desenho
 void draw(void)
 {
@@ -21,32 +27,67 @@ void draw(void)
 // Limpa a janela de visualização com a cor de fundo especificada
     glClear(GL_COLOR_BUFFER_BIT);
 
+ glPushMatrix();
+    glTranslatef (0.0, sen, 0.0);
 // Desenha um quadrado preenchido com a cor corrente
     glBegin(GL_QUADS);
-        glColor3f(1.0f, 1.0f, 1.0f);
-        glVertex2i(0, h0 + 50);
-        glVertex2i(0, h0 + 0);
-        glVertex2i(80, h0 + 0);
-        glVertex2i(80, h0 + 50);
+        glColor3f(0.0, 1.0, 1.0);
+        glVertex2i(80, h4 + 0);
+        glVertex2i(80, h4 + 20);
+        glVertex2i(100,h4 + 20);
+        glVertex2i(100, h4 + 0);
     glEnd();
-
+glPopMatrix();
+   
+ glPushMatrix();   
+    glTranslatef (0.0, sen1, 0.0);
     glBegin(GL_QUADS);
-        glColor3f(1.0f, 0.0f, 0.0f);
-        glVertex2i(80, h1 + 50);
-        glVertex2i(80, h1 + 0);
-        glVertex2i(160, h1 + 0);
-        glVertex2i(160, h1 + 50);
+       glColor3f(0.0, 0.0, 1.0);
+        glVertex2i(60, h3 + 0);
+        glVertex2i(60, h3 + 20);
+        glVertex2i(80, h3 + 20);
+        glVertex2i(80, h3 + 0);
     glEnd();
+glPopMatrix();
 
+ glPushMatrix();
+    glTranslatef (0.0, sen2, 0.0);
     glBegin(GL_QUADS);
-        glColor3f(0.0f, 1.0f, 0.0f);
-        glVertex2i(160, h2 + 50);
-        glVertex2i(160, h2 + 0);
-        glVertex2i(240, h2 + 0);
-        glVertex2i(240, h2 + 50);
+        glColor3f(0.0, 1.0, 0.0);
+        glVertex2i(40, h2 + 0);
+        glVertex2i(40, h2 + 20);
+        glVertex2i(60, h2 + 20);
+        glVertex2i(60, h2 + 0);
     glEnd();
+glPopMatrix();
 
-    glFlush();
+glPushMatrix();
+    glTranslatef (0.0, sen3, 0.0);
+    glBegin(GL_QUADS);
+       glColor3f(1.0, 0.0, 0.0);
+        glVertex2i(20, h1 + 0);
+        glVertex2i(20, h1 + 20);
+        glVertex2i(40, h1 + 20);
+        glVertex2i(40, h1 + 0);
+    glEnd();
+glPopMatrix();
+
+glPushMatrix();
+
+    glTranslatef (0.0, sen4, 0.0);
+    glBegin(GL_QUADS);
+        glColor3f(0.0, 1.0, 1.0);
+         glVertex2i(0, h0 + 0);
+        glVertex2i(0, h0 + 20);
+        glVertex2i(20, h0 + 20);
+        glVertex2i(20, h0 + 0);
+    glEnd();
+glPopMatrix();
+
+
+ glFlush();
+glutSwapBuffers();
+
 }
 
 // Inicializa parâmetros de rendering
@@ -77,7 +118,7 @@ void changeWindowSize(GLsizei w, GLsizei h)
 }
 
 
-void down(int value)
+/*void down(int value)
 {
     
 
@@ -99,38 +140,67 @@ void down(int value)
   
     glutPostRedisplay();
     glutTimerFunc(33,down, 1);
-}
+}*/
 
 void up(int value)
-{
-    
+{  
 
-    if(h0 < 50){
-        h0 += speed;
-    } 
-    else {
-        h0 = 50;
-        if(h1 < 50){
-            h1 += speed;
-        } 
-        else {
-            h1 = 50;
-            if(h2 < 50){
-                h2 += speed;
-            }
-             else {
-                h2 = 50;
+   h0 = speed;
+   h1 = speed + 1;
+   h2 = speed + 2;
+   h3 = speed + 3;
+   h4 = speed + 4;
 
-                glutTimerFunc(33,down, 1);
-            }
-             
-        }
-
-    }
+                         
+      
 
     
     glutPostRedisplay();
     glutTimerFunc(33,up, 1);
+}
+
+
+// Fun��o callback chamada para gerenciar eventos de teclado
+void GerenciaTeclado(unsigned char key, int x1, int y1){
+    switch(key)
+    {
+    case 'o':
+
+
+            if(sen < 30 && sen1 < 30 && sen2 < 30 && sen3 < 30 && sen4 < 30){
+                 sen = (sen + 5) % 180;
+                 sen1 = (sen1 + 6) % 180;
+                 sen2 = (sen2 + 7) % 180;
+                 sen3 = (sen3 + 8) % 180;
+                 sen4 = (sen4 + 9) % 180;                
+                                                
+            }
+           // if(sen = 0 && sen1  && sen2 >=0 && sen3 >= 0 && sen4 >= 0){
+           //       sen = (sen + 9) % 180;
+           //       sen1 = (sen1 - 8) % 180;
+           //       sen2 = (sen2 - 7) % 180;
+           //       sen3 = (sen3 - 6) % 180;
+           //       sen4 = (sen4 - 5) % 180;                
+                                                
+           //  }
+
+
+           
+            
+                
+        
+           
+            glutPostRedisplay();
+
+         break;
+
+    case 'p':
+        // y -= 5;
+        break;
+
+    }
+    glutPostRedisplay();
+
 }
 
 int main(int argc, char **argv)
@@ -142,7 +212,9 @@ int main(int argc, char **argv)
     glutCreateWindow("Holla");
     glutDisplayFunc(draw);
     glutReshapeFunc(changeWindowSize);
-    glutTimerFunc(33, up, 1);
+     glutKeyboardFunc(GerenciaTeclado);
+
+    //glutTimerFunc(33, up, 1);
     init();
     glutMainLoop();
 return 0;           

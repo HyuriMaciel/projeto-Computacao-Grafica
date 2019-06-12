@@ -39,7 +39,6 @@ void display(void){
   /* origem posicionada  */
   glTranslatef (1.0, 0.0, 0.0);
   glRotatef ((GLfloat) sen, 0.0, 0.0, 1.0);
-  glTranslatef (1.0, 0.0, 0.0);
 
   glPushMatrix();
   glBegin(GL_TRIANGLES);

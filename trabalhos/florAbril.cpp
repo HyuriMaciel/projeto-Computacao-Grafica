@@ -6,10 +6,10 @@
 static int shoulder = 0, sen = 0;
 
 
-static  float r =  1.0f,  g = 0.0f, b = 0.0f;
-static  float r1 = 0.0f, g1 = 1.0f, b1 = 0.0f;
-static  float r2 = 0.0f, g2 = 0.0f, b2 = 1.0f;
-static  float r3 = 1.0f, g3 = 1.0f, b3 = 1.0f;
+static  float r =  1.0,  g = 0.0, b = 0.0;
+static  float r1 = 0.0, g1 = 1.0, b1 = 0.0;
+static  float r2 = 0.0, g2 = 0.0, b2 = 1.0;
+static  float r3 = 1.0, g3 = 1.0, b3 = 1.0;
 static  float rAux, bAux, gAux;
 ;
 
@@ -53,10 +53,21 @@ void keyboard (unsigned char key, int x, int y){
 void D(){
 
   rAux = r; gAux = g; bAux = b;
-  r = r3 ; g = g3; b = b3;
-  r1 = rAux; g1 = gAux; b1 = bAux;
-  
-                                
+  r = r3; g = g3; b = b3;
+  r3 = r2; g3 = g2; b3 = b2;
+  r2 = r1; g2 = g1; b2 = b1;
+  r1 = rAux; g1 = gAux; b1 = bAux;                              
+
+
+}
+
+void E(){
+
+  rAux = r; gAux = g; bAux = b;
+  r = r1; g = g1; b = b1;
+  r1 = r2; g1 = g2; b1 = b2;
+  r2 = r3; g2 = g3; b2 = b3;
+  r3 = rAux; g3 = gAux; b3 = bAux;                              
 
 
 }
@@ -65,7 +76,7 @@ void MouseClick (int button, int state, int x, int y)
 { 
 
 
-  if (button == GLUT_LEFT_BUTTON){
+  if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
     D();
     glutPostRedisplay();
 
@@ -73,25 +84,25 @@ void MouseClick (int button, int state, int x, int y)
   } 
 
   if(button == GLUT_RIGHT_BUTTON){
-        sen = (sen - 5) % 360;
+        E();
         glutPostRedisplay(); 
 
    } 
 
 
  
-    // switch (button) 
-    // { 
-    //     case GLUT_LEFT_BUTTON:  
-    //                             D();
-    //                             glutPostRedisplay();
+    /*switch (button) 
+    { 
+        case GLUT_LEFT_BUTTON:  
+                                D();
+                                glutPostRedisplay();
 
-    //                            break; 
-    //     case GLUT_RIGHT_BUTTON: sen = (sen - 5) % 360;
-    //                             glutPostRedisplay(); 
-    //                            break; 
+                               break; 
+        case GLUT_RIGHT_BUTTON: sen = (sen - 5) % 360;
+                                glutPostRedisplay(); 
+                               break; 
          
-    //} 
+    } */
     
 } 
 
