@@ -15,9 +15,9 @@ void display(void)
 {
    
    glClear (GL_COLOR_BUFFER_BIT);
-   glColor3f(1.0,1.0,1.0);
+   glColor3f(1.0, 1.0, 1.0);
 
-   glLoadIdentity();
+   //glLoadIdentity();
 
    glPushMatrix();
       glRotatef((GLfloat) year, 1.0, 0.0,0.0);
@@ -26,8 +26,8 @@ void display(void)
    glPopMatrix();
       
    glPushMatrix();
-      glRotatef((GLfloat) year, 0.0, 1.0,0.0);
-      glTranslatef(2.0, 0.0, 1.0); // translada a partir do novo sistema de coordenadas
+      glRotatef((GLfloat) year, 1.0, 0.0,0.0);
+      glTranslatef(2.0, 0.0, 0.0); // translada a partir do novo sistema de coordenadas
       glRotatef((GLfloat) day, 0.0, 1.0,0.0);
       glutWireSphere(0.2,10,8); // Desenha planeta
    glPopMatrix();
@@ -42,9 +42,9 @@ void reshape (int w, int h)
    glViewport (0, 0, (GLsizei) w, (GLsizei) h); 
    
    glMatrixMode (GL_MODELVIEW);
-   
    glLoadIdentity ();
-   gluPerspective(60.0, (GLfloat) w/ (GLfloat) h, 1.0,20.0);
+
+   gluPerspective(60.0, (GLfloat)w/(GLfloat)h, 1.0,20.0);
    gluLookAt(0.0,0.0,5.0,0.0,0.0,0.0,0.0,1.0,0.0); // posição do camera
 }
 
@@ -77,7 +77,7 @@ void keyboard(unsigned char key, int x, int y)
 int main(int argc, char** argv)
 {
    glutInit(&argc, argv);
-   glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB);
+   glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
    glutInitWindowSize (500, 500); 
    glutInitWindowPosition (100, 100);
    glutCreateWindow ("Rotação planetas");
