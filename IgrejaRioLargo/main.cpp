@@ -11,8 +11,6 @@
 #include<stdlib.h>
 #include <fstream>
 
-
-
 #define WIRE 0
 #define FILL 1
 
@@ -47,20 +45,16 @@
 #define VIA12 27
 #define VIA13 28
 #define VIA14 29
-
 #define CALICE 30
-
 #define PISOI  31
 #define PISOEN 32
 #define PAREDEF 33
-
 #define MADERIALTAR1 34
 #define PISO2 35
 #define PISO3 36
 #define FERROGRADE 37
 #define AR 38
 #define JESUS 39
-
 
 // Camera
 GLdouble phi = M_PI / 2, theta = 0, radius = 85;
@@ -69,7 +63,7 @@ GLfloat fAspect;
 
 double inc = 5 * M_PI / 180;
 
-int style = 0;    // Wireframe or solid
+int style = 0;
 
 GLdouble doorAngle = 0;     // Angulo da porta
 bool openingDoor = false;    // flag para abrir a porta
@@ -104,7 +98,6 @@ void loadTexture(GLuint texture, const char* filename)
 void rgb(float r, float g, float b){
     glColor3f(r/255, g/255, b/255);
 }
-
 
 // desenha um tringulo
 void drawTriangle(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2, GLfloat x3, GLfloat y3, GLfloat z) {
@@ -158,7 +151,6 @@ void drawRect(GLfloat x, GLfloat y, GLfloat z, GLfloat sx, GLfloat sy, GLfloat s
     glPopMatrix();
 }
 
-
 // Desenha porta
 void drawDoor(){
     glPushMatrix();
@@ -167,11 +159,6 @@ void drawDoor(){
     glScalef(3, 3, 0.10);
     drawRect(0,1,0,2,3,1, 0.8, 0.52, 0.25);
     glPopMatrix();
-}
-
-//parede direita
-void paredeD(){
-
 }
 
 // Janelas
@@ -582,14 +569,6 @@ void drawGrid(){
 
 }
 
-void drawAltar(){
-
-    // glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-
-
-
-}
-
 void drawQuadr(){
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
     glBindTexture(GL_TEXTURE_2D, texture_handle[VIA1]);
@@ -646,10 +625,6 @@ void drawObj(){
     glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]); // cruz torre
     drawRect(0, 20.5, 20, 0.6, 10, 0.5 ,1,  1,  1); // cruz torre
     drawRect(0, 24, 20, 4, 0.5, 0.5 ,1,  1,  1); // cruz torre
-
-
-
-
 
 
     /*banco*/
@@ -746,6 +721,7 @@ void drawObj(){
 }
 
 void drawSino(){
+
     glBindTexture(GL_TEXTURE_2D, texture_handle[PAREDEF]);
     drawRect(-2.7, 30, 19.7, 1, 4, 1 ,1,  1, 1);
     drawRect(2.7, 30, 19.7, 1, 4, 1 ,1,  1, 1);
@@ -767,7 +743,6 @@ void mouseFunc(int button, int state, int x, int y) {
     glutPostRedisplay();
 }
 
-
 void drawCylinder(GLfloat x, GLfloat y, GLfloat z, GLdouble radius, GLdouble height) {
     GLUquadricObj *obj = gluNewQuadric();
     glPushMatrix();
@@ -781,7 +756,6 @@ void drawCylinder(GLfloat x, GLfloat y, GLfloat z, GLdouble radius, GLdouble hei
     glPopMatrix();
 }
 
-
 // Função callback chamada para fazer o desenho
 void desenha(void) {
 
@@ -789,9 +763,7 @@ void desenha(void) {
 
     drawWindown();
     drawQuadr();
-    drawAltar();
     drawObj();
-    drawSino();
     drawGrid();
     //glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
@@ -809,11 +781,11 @@ void desenha(void) {
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[TETO]);
     drawRect(0, 22.35, -0.9, 22, 0.3, 40, 0.69,0.69,0.69);// Teto
+    drawSino();
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[PAREDEF]);
     drawRect(0, 11.00, -19.85, 22, 22.20, 0.3, 1, 1, 0);//Parede fundo
     drawRect(-10.90, 11.00, -0.60, 0.3, 22.20, 39.35 ,1, 1, 0);//parede esquerda lateral 1
-    // COMENTAR====================================================================
     drawRect(10.90, 11.00, -0.60, 0.3, 22.20, 39.35 ,1, 1, 0);//parede esquerda lateral 1
 
     // mureta
@@ -1043,6 +1015,8 @@ void desenha(void) {
     glTranslatef(1.5, 1.5, 19.85);
     drawDoor();
 
+
+
     glPopMatrix();
 
     glutSwapBuffers();
@@ -1129,13 +1103,13 @@ void inicializa (void) {
     GLfloat luzAmbiente[4] = {0.3, 0.3, 0.3, 1.0};
     GLfloat luzDifusa[4]={0.4, 0.4, 0.4, 1.0};
     GLfloat posicaoLuz[4]={40, 20.0, 30.0, 1.0};
-
+    // sombreamento  dos objetos
     glShadeModel(GL_SMOOTH);
-
     // Ativa o uso da luz ambiente
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, luzAmbiente);
 
-    // Define os parâmetros da luz de número 0
+    // Define a posição e as componentes de cor da fonte de luz GL_LIGHT0.
+    //os parâmetros da luz de número 0
     glLightfv(GL_LIGHT0, GL_AMBIENT, luzAmbiente);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, luzDifusa );
     glLightfv(GL_LIGHT0, GL_POSITION, posicaoLuz );
@@ -1150,9 +1124,7 @@ void inicializa (void) {
 
 
     glClearColor(0, 0, 0, 1);
-
     glEnable(GL_DEPTH_TEST);
-
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -1160,8 +1132,6 @@ void inicializa (void) {
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
     glGenTextures(40, texture_handle);
-
-
 
     loadTexture(texture_handle[0], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/piso.jpg");
     loadTexture(texture_handle[1], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/wood.jpg");
@@ -1179,7 +1149,6 @@ void inicializa (void) {
     loadTexture(texture_handle[13], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/sinoo.png");
     loadTexture(texture_handle[14], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/vidroJ.jpg");
     loadTexture(texture_handle[15], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/chao.jpg");
-
     loadTexture(texture_handle[16], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via1.jpg");
     loadTexture(texture_handle[17], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via2.jpg");
     loadTexture(texture_handle[18], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via3.jpg");
@@ -1187,7 +1156,6 @@ void inicializa (void) {
     loadTexture(texture_handle[20], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via5.jpg");
     loadTexture(texture_handle[21], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via6.jpg");
     loadTexture(texture_handle[22], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via7.jpg");
-
     loadTexture(texture_handle[23], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via8.jpg");
     loadTexture(texture_handle[24], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via9.jpg");
     loadTexture(texture_handle[25], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via10.jpg");
@@ -1196,7 +1164,6 @@ void inicializa (void) {
     loadTexture(texture_handle[28], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via13.jpg");
     loadTexture(texture_handle[29], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/via14.jpg");
     loadTexture(texture_handle[30], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/calice.jpg");
-
     loadTexture(texture_handle[31], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/pisoIgraja.jpg");
     loadTexture(texture_handle[32], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/pisoentrada.jpg");
     loadTexture(texture_handle[33], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/parede.jpg");
@@ -1206,10 +1173,9 @@ void inicializa (void) {
     loadTexture(texture_handle[37], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/ferrograde.jpg");
     loadTexture(texture_handle[38], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/ar.png");
     loadTexture(texture_handle[39], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/jesus.png");
+
     glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 }
-
-// Programa Principal
 
 int main(int argc, char **argv) {
     glutInit(&argc, argv);
