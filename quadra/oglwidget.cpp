@@ -1,27 +1,46 @@
 #include "oglwidget.h"
+#include <QKeyEvent>
+#include <string.h>
+#include <stdio.h>
+#include <QDebug>
+#include <iostream>
 
 using namespace std;
 
 #define PI 3.14159265359
 
-int time_casa = 1;
-int time_visitante = 1;
+int time_casa = 0;
+int time_visitante = 0;
 char texto[30];
 GLfloat win;
 
-static float x = 50.0f;
-static float y = 50.0f;
-static float z = 15.0f;
+GLfloat x = 50.0f;
+GLfloat y = 50.0f;
+GLfloat z = 15.0f;
+
+GLfloat posX = 0.0, posY= 0.0;
+GLint time1 = 0, time2 = 0;
+
+#define SPEEDBALL 0.02
 
 bool OGLWidget::_NAIVE1ALGO = true;
 bool OGLWidget::_NAIVE2ALGO = true;
 GLfloat OGLWidget::_LINESIZE = 1.0f;
+
+GLfloat OGLWidget::_x = 50.0f;
+GLfloat OGLWidget::_y = 50.0f;
+GLfloat OGLWidget::_z = 15.0f;
+
+GLchar OGLWidget::_aux ;
+
 Color OGLWidget::_COLOR = {.r = 1.0, .g = 1.0, .b = 1.0};
 vector<int> OGLWidget::_COORDINATES;
 
 static double fullcircle = 2 * PI;
 static double semicircle = PI;
 static double borderrounded = PI / 2;
+
+
 
 void draw_point(Point p, Color c);
 void draw_point(Point p, GLfloat size, Color c);
@@ -56,8 +75,8 @@ void draw_point(Point p, Color c)
     glPointSize(OGLWidget::_LINESIZE);
 
     glBegin(GL_POINTS);
-       glColor3f(c.r, c.g, c.b);
-       glVertex2i(p.x, p.y);
+    glColor3f(c.r, c.g, c.b);
+    glVertex2i(p.x, p.y);
     glEnd();
 }
 
@@ -66,8 +85,8 @@ void draw_point(Point p, GLfloat size, Color c)
     glPointSize(size);
 
     glBegin(GL_POINTS);
-       glColor3f(c.r, c.g, c.b);
-       glVertex2i(p.x, p.y);
+    glColor3f(c.r, c.g, c.b);
+    glVertex2i(p.x, p.y);
     glEnd();
 }
 
@@ -298,15 +317,15 @@ void draw_breseham_line_high(Point p1, Point p2, Color c)
 
     for (int y = p1.y; y <= p2.y; ++y)
     {
-         draw_point({. x = x, .y = y}, c);
+        draw_point({. x = x, .y = y}, c);
 
-         if (D > 0)
-         {
+        if (D > 0)
+        {
             x = x + xi;
             D = D - 2 * dy;
-         }
+        }
 
-         D = D + 2 * dx;
+        D = D + 2 * dx;
     }
 }
 
@@ -399,14 +418,6 @@ void draw_naive_circle_cartesian(Point center, int r, CircleType type, Color c)
     }
 }
 
-//void draw_rectangle(Point points[4])
-//{
-//    draw_line(points[0], points[1], OGLWidget::_COLOR);
-//    draw_line(points[2], points[3], OGLWidget::_COLOR);
-//    draw_line(points[0], points[2], OGLWidget::_COLOR);
-//    draw_line(points[1], points[3], OGLWidget::_COLOR);
-//}
-
 void draw_rectangle(int width, int height, Color color)
 {
     Point p0 = {.x = 0, .y = 0};
@@ -439,163 +450,117 @@ void bottom()
     draw_circle({.x = 170, .y = 205}, 20, INVERTEDBORDERIGHT, OGLWidget::_COLOR);
 }
 
-
 void top_circle()
 {
     draw_circle({.x = 97, .y = -95}, 10, SEMI, OGLWidget::_COLOR);
 
-//    draw_circle({.x = 50, .y = -60}, 25, FULL, OGLWidget::_COLOR);
-//    draw_circle({.x = 140, .y = -60}, 25, FULL, OGLWidget::_COLOR);
-//    draw_point({.x = 50, .y = -60}, 2, OGLWidget::_COLOR);
-//    draw_point({.x = 140, .y = -60}, 2, OGLWidget::_COLOR);
-
-//    // ball left
-//    draw_line({.x = 20, .y = -65}, {.x = 25, .y = -65}, OGLWidget::_COLOR);
-//    draw_line({.x = 20, .y = -55}, {.x = 25, .y = -55}, OGLWidget::_COLOR);
-
-//    draw_line({.x = 75, .y = -65}, {.x = 80, .y = -65}, OGLWidget::_COLOR);
-//    draw_line({.x = 75, .y = -55}, {.x = 80, .y = -55}, OGLWidget::_COLOR);
-
-//    // ball right
-//    draw_line({.x = 110, .y = -65}, {.x = 115, .y = -65}, OGLWidget::_COLOR);
-//    draw_line({.x = 110, .y = -55}, {.x = 115, .y = -55}, OGLWidget::_COLOR);
-
-//    draw_line({.x = 165, .y = -65}, {.x = 170, .y = -65}, OGLWidget::_COLOR);
-//    draw_line({.x = 165, .y = -55}, {.x = 170, .y = -55}, OGLWidget::_COLOR);
 }
 
 void bottom_circle()
 {
     draw_circle({.x = 97, .y = 205}, 10, INVERTEDSEMI, OGLWidget::_COLOR);
 
-//    draw_circle({.x = 50, .y = 170}, 25, FULL, OGLWidget::_COLOR);
-//    draw_circle({.x = 140, .y = 170}, 25, FULL, OGLWidget::_COLOR);
-//    draw_point({.x = 50, .y = 170}, 2, OGLWidget::_COLOR);
-//    draw_point({.x = 140, .y = 170}, 2, OGLWidget::_COLOR);
-
-//    // ball left
-//    draw_line({.x = 20, .y = 165}, {.x = 25, .y = 165}, OGLWidget::_COLOR);
-//    draw_line({.x = 20, .y = 175}, {.x = 25, .y = 175}, OGLWidget::_COLOR);
-
-//    draw_line({.x = 75, .y = 165}, {.x = 80, .y = 165}, OGLWidget::_COLOR);
-//    draw_line({.x = 75, .y = 175}, {.x = 80, .y = 175}, OGLWidget::_COLOR);
-
-//    // ball right
-//    draw_line({.x = 110, .y = 165}, {.x = 115, .y = 165}, OGLWidget::_COLOR);
-//    draw_line({.x = 110, .y = 175}, {.x = 115, .y = 175}, OGLWidget::_COLOR);
-
-//    draw_line({.x = 165, .y = 165}, {.x = 170, .y = 165}, OGLWidget::_COLOR);
-//    draw_line({.x = 165, .y = 175}, {.x = 170, .y = 175}, OGLWidget::_COLOR);
 }
 
 void center_circle()
 {
     draw_circle({.x = 100, .y = 50}, 25, FULL, OGLWidget::_COLOR);
-   // draw_point({.x = 60, .y = 10}, 2, OGLWidget::_COLOR);
-    //draw_point({.x = 127, .y = 10}, 2, OGLWidget::_COLOR);
 
     draw_point({.x = 100, .y = 50},5, OGLWidget::_COLOR);
 
-    //draw_point({.x = 60, .y = 90}, 2, OGLWidget::_COLOR);
-    //draw_point({.x = 127, .y = 90}, 2, OGLWidget::_COLOR);
-}
 
+}
 
 // Desenha um texto na janela GLUT
 void DesenhaPlacar(char *string)
 {
     glPushMatrix();
-        // Posição no universo onde o texto será colocado
-        //glRasterPos2f(-0.90,0.8);
-        glRasterPos2f(0.0,350.0);
-        //glRasterPos2f(0,0-(0*0.08));
-        //glRasterPos2f(0,0);
-        // Exibe caracter a caracter
-        while(*string)
-             glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24,*string++);
+    // Posição no universo onde o texto será colocado
+    //glRasterPos2f(-0.90,0.8);
+    glRasterPos2f(0.0,350.0);
+    //glRasterPos2f(0,0-(0*0.08));
+    //glRasterPos2f(0,0);
+    // Exibe caracter a caracter
+    while(*string)
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24,*string++);
     glPopMatrix();
 }
 
-void icehockeycourt()
+
+void bola(){
+    glBegin(GL_QUADS);
+        glColor3f(0.0, 200.0, 200.0);
+        glVertex2f(x, y + z);
+        glVertex2f(x, y);
+        glVertex2f(x + z, y);
+        glVertex2f(x + z , y + z);
+    glEnd();
+
+}
+
+void fotbool()
 {
+   // glTranslatef(180.0, -200.0, 0.0);
+   // createBall();
+    bola();
 
 
-      glBegin(GL_QUADS);
-            glColor3f(1.0f, 1.0f, 1.0f);
-            glVertex2f(x, y + z);
-            glVertex2f(x, y);
-            glVertex2f(x + z, y);
-            glVertex2f(x + z , y + z);
-        glEnd();
-
-
-
-      glPushMatrix();
-       glTranslatef(150.0, -310.0, 0.0);
-       sprintf(texto, "Placar\n IC %d x %d VISITANTES", time_casa, time_visitante);
-
+    glPushMatrix();
+       glTranslatef(180.0, -320.0, 0.0);
+       sprintf(texto, " IC %d x %d VISITANTES", time_casa, time_visitante);
        DesenhaPlacar(texto);
-     glPopMatrix();
+    glPopMatrix();
 
     glPushMatrix();
         glTranslatef(200.0, 50.0, 0.0);
         draw_rectangle(200, 300, OGLWidget::_COLOR);
-
         glTranslatef(0.0, 95.0, 0.0);
-       // draw_rectangle(200, 100, OGLWidget::_COLOR);
-
         draw_line({.x = 0, .y = 50}, {.x = 200, .y = 50}, OGLWidget::_COLOR);
-
-       // top();
-      // top_circle();
         center_circle();
-       // bottom_circle();
-       // bottom();
-   glPopMatrix();
-// area goleira cima
+    glPopMatrix();
+
+    // area goleira cima
     glPushMatrix();
         glTranslatef(250.0, 50.0, 0.0);
         draw_rectangle(100, 60, OGLWidget::_COLOR);
-   glPopMatrix();
+    glPopMatrix();
 
-   glPushMatrix();
-       glTranslatef(275.0, 50.0, 0.0);
-       draw_rectangle(50, 35, OGLWidget::_COLOR);
-  glPopMatrix();
+    glPushMatrix();
+        glTranslatef(275.0, 50.0, 0.0);
+        draw_rectangle(50, 35, OGLWidget::_COLOR);
+    glPopMatrix();
 
     // semi circulo area goleiro cima
-   glPushMatrix();
-       glTranslatef(203.0, 210.0, 0.0);
-       top_circle();
-  glPopMatrix();
+    glPushMatrix();
+        glTranslatef(203.0, 210.0, 0.0);
+        top_circle();
+    glPopMatrix();
 
-  glPushMatrix();
-   glTranslatef(220.0, 80.0, 0.0);
-    draw_point({.x = 80, .y = 14}, 2, OGLWidget::_COLOR);
-  glPopMatrix();
+    glPushMatrix();
+        glTranslatef(220.0, 80.0, 0.0);
+        draw_point({.x = 80, .y = 14}, 2, OGLWidget::_COLOR);
+    glPopMatrix();
 
-  // area goleiro baixo
-   glPushMatrix();
-       glTranslatef(250.0, 290.0, 0.0);
-       draw_rectangle(100, 60, OGLWidget::_COLOR);
-  glPopMatrix();
+    // area goleiro baixo
+    glPushMatrix();
+        glTranslatef(250.0, 290.0, 0.0);
+        draw_rectangle(100, 60, OGLWidget::_COLOR);
+    glPopMatrix();
 
-  glPushMatrix();
-      glTranslatef(272.0, 315.0, 0.0);
-      draw_rectangle(55, 35, OGLWidget::_COLOR);
- glPopMatrix();
-// semi circulo area goleiro baixo
-  glPushMatrix();
-      glTranslatef(205.0, 80.0, 0.0);
-      bottom_circle();
- glPopMatrix();
+    glPushMatrix();
+        glTranslatef(272.0, 315.0, 0.0);
+        draw_rectangle(55, 35, OGLWidget::_COLOR);
+    glPopMatrix();
+    // semi circulo area goleiro baixo
+    glPushMatrix();
+        glTranslatef(205.0, 80.0, 0.0);
+        bottom_circle();
+    glPopMatrix();
 
- glPushMatrix();
-  glTranslatef(220.0, 80.0, 0.0);
-   draw_point({.x = 80, .y = 225}, 2, OGLWidget::_COLOR);
- glPopMatrix();
-
-
+    glPushMatrix();
+        glTranslatef(220.0, 80.0, 0.0);
+        draw_point({.x = 80, .y = 225}, 2, OGLWidget::_COLOR);
+    glPopMatrix();
 
 }
 
@@ -604,6 +569,7 @@ OGLWidget::OGLWidget(QWidget *parent)
 {
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+
     timer->start(10);
 
     cout << "Construtor" << endl;
@@ -638,43 +604,57 @@ void OGLWidget::paintGL()
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    if (_COORDINATES.size() >= 4)
-    {
-        for (unsigned int n = 2; n < _COORDINATES.size(); ++n)
-        {
-            if (n % 2 != 0)
-            {
-                int x1 = _COORDINATES.at(n - 3);
-                int y1 = _COORDINATES.at(n - 2);
+//    if (_COORDINATES.size() >= 4)
+//    {
+//        for (unsigned int n = 2; n < _COORDINATES.size(); ++n)
+//        {
+//            if (n % 2 != 0)
+//            {
+//                int x1 = _COORDINATES.at(n - 3);
+//                int y1 = _COORDINATES.at(n - 2);
 
-                int x2 = _COORDINATES.at(n - 1);
-                int y2 = _COORDINATES.at(n);
+//                int x2 = _COORDINATES.at(n - 1);
+//                int y2 = _COORDINATES.at(n);
 
-                draw_line({.x = x1, .y = y1}, {.x = x2, .y = y2}, OGLWidget::_COLOR);
-            }
-        }
-    } else
-    {
-        if (_COORDINATES.size() == 2)
-        {
-            draw_point({.x = _COORDINATES.at(0), .y = _COORDINATES.at(1)}, OGLWidget::_COLOR);
-        }
-    }
-
-    icehockeycourt();
-
-    cout << _COLOR.r << " " << _COLOR.g << " " << _COLOR.b << endl;
-
-//    draw_naive_circle_cartesian({.x = 300, .y = 200}, 50, SEMI, _COLOR);
+//                draw_line({.x = x1, .y = y1}, {.x = x2, .y = y2}, OGLWidget::_COLOR);
+//            }
+//        }
+//    } else
+//    {
+//        if (_COORDINATES.size() == 2)
+//        {
+//            draw_point({.x = _COORDINATES.at(0), .y = _COORDINATES.at(1)}, OGLWidget::_COLOR);
+//        }
+//    }
 
 
-     glFlush();
+//    if (_aux == 1){
+//        _x = _x + 10;
+//    }
+//    if(){
+//        _x = _x - 10;
+//    }
+//    if(){
+//        _y = _y + 10;
+//    }
+//    if(){
+//        _y =_y - 10;
+//    }
+
+    fotbool();
+
+
+    //cout << _COLOR.r << " " << _COLOR.g << " " << _COLOR.b << endl;
+
+    //    draw_naive_circle_cartesian({.x = 300, .y = 200}, 50, SEMI, _COLOR);
+
+    glFlush();
 
 }
 
 void OGLWidget::mousePressEvent(QMouseEvent *event)
 {
-//    cout << "x: " << event->x() << " y: " << event->y() << endl;
+    //    cout << "x: " << event->x() << " y: " << event->y() << endl;
 
     int x = event->x();
     int y = event->y();
@@ -683,48 +663,28 @@ void OGLWidget::mousePressEvent(QMouseEvent *event)
     _COORDINATES.push_back(y);
 }
 
+//void OGLWidget::keyPress(QKeyEvent *event)
+//{
+//    switch (event->key()) {
+//    case Qt::Key_A:
 
-void GerenciaTeclado(unsigned char key, int x1, int y1)
-{
+//        break;
+//    case Qt::Key_Left:
 
-    switch(key)
-    {
-        //case GLUT_KEY_RIGHT:
-        case 'd':
-            x = x + 10;
-            glutPostRedisplay();
-            break;
-
-        //case GLUT_KEY_LEFT:
-        case 'a':
-            x = x - 10;
-            glutPostRedisplay();
-            break;
-
-        //case GLUT_KEY_UP:
-        case 'w':
-            y = y + 10;
-            glutPostRedisplay();
-            break;
-
-        //case GLUT_KEY_DOWN:
-        case 's':
-            y = y - 10;
-            if(y < 0)
-            {
-                time_casa = time_casa + 1;
-                x = 150.0f;
-                y = 150.0f;
-            }
-
-            glutPostRedisplay();
-            break;
+//        break;
+//    case Qt::Key_Right:
 
 
-    }
-    glutPostRedisplay();
+//        break;
+//    case Qt::Key_Up:
 
-}
+
+//        break;
+//    default:
+//        break;
+//    }
+//}
+
 
 void OGLWidget::resizeGL(int w, int h)
 {
