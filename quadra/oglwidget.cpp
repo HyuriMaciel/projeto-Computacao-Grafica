@@ -4,6 +4,10 @@
 #include <stdio.h>
 #include <QDebug>
 #include <iostream>
+#include <GL/glut.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <math.h>
 
 using namespace std;
 
@@ -18,10 +22,11 @@ GLfloat x = 50.0f;
 GLfloat y = 50.0f;
 GLfloat z = 15.0f;
 
-GLfloat posX = 0.0, posY= 0.0;
+GLfloat posX = 0.0, posY= 0.0, posZ = 0.0;
 GLint time1 = 0, time2 = 0;
-
-#define SPEEDBALL 0.02
+GLint aux = 0;
+GLchar aux1;
+#define SPEEDBALL 5.0
 
 bool OGLWidget::_NAIVE1ALGO = true;
 bool OGLWidget::_NAIVE2ALGO = true;
@@ -31,7 +36,7 @@ GLfloat OGLWidget::_x = 50.0f;
 GLfloat OGLWidget::_y = 50.0f;
 GLfloat OGLWidget::_z = 15.0f;
 
-GLchar OGLWidget::_aux ;
+GLint OGLWidget::_p = 0; ;
 
 Color OGLWidget::_COLOR = {.r = 1.0, .g = 1.0, .b = 1.0};
 vector<int> OGLWidget::_COORDINATES;
@@ -67,6 +72,9 @@ void center_circle();
 void bottom_circle();
 void bottom();
 void icehockeycourt();
+void placar();
+void bola();
+void createBall();
 
 
 
@@ -471,6 +479,9 @@ void center_circle()
 
 }
 
+
+
+
 // Desenha um texto na janela GLUT
 void DesenhaPlacar(char *string)
 {
@@ -490,10 +501,10 @@ void DesenhaPlacar(char *string)
 void bola(){
     glBegin(GL_QUADS);
         glColor3f(0.0, 200.0, 200.0);
-        glVertex2f(x, y + z);
-        glVertex2f(x, y);
-        glVertex2f(x + z, y);
-        glVertex2f(x + z , y + z);
+        glVertex2f(posX, posY + posZ);
+        glVertex2f(posX, posY);
+        glVertex2f(posX + posZ, posY);
+        glVertex2f(posX + posZ , posY + posZ);
     glEnd();
 
 }
@@ -505,11 +516,11 @@ void fotbool()
     bola();
 
 
-    glPushMatrix();
-       glTranslatef(180.0, -320.0, 0.0);
-       sprintf(texto, " IC %d x %d VISITANTES", time_casa, time_visitante);
-       DesenhaPlacar(texto);
-    glPopMatrix();
+//    glPushMatrix();
+//       glTranslatef(180.0, -320.0, 0.0);
+//       sprintf(texto, " IC %d x %d VISITANTES", time_casa, time_visitante);
+//       DesenhaPlacar(texto);
+//    glPopMatrix();
 
     glPushMatrix();
         glTranslatef(200.0, 50.0, 0.0);
@@ -604,6 +615,9 @@ void OGLWidget::paintGL()
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+
+
+
 //    if (_COORDINATES.size() >= 4)
 //    {
 //        for (unsigned int n = 2; n < _COORDINATES.size(); ++n)
@@ -628,20 +642,8 @@ void OGLWidget::paintGL()
 //    }
 
 
-//    if (_aux == 1){
-//        _x = _x + 10;
-//    }
-//    if(){
-//        _x = _x - 10;
-//    }
-//    if(){
-//        _y = _y + 10;
-//    }
-//    if(){
-//        _y =_y - 10;
-//    }
-
     fotbool();
+    placar();
 
 
     //cout << _COLOR.r << " " << _COLOR.g << " " << _COLOR.b << endl;
@@ -656,34 +658,119 @@ void OGLWidget::mousePressEvent(QMouseEvent *event)
 {
     //    cout << "x: " << event->x() << " y: " << event->y() << endl;
 
-    int x = event->x();
-    int y = event->y();
+//    int x = event->x();
+//    int y = event->y();
 
-    _COORDINATES.push_back(x);
-    _COORDINATES.push_back(y);
+//    _COORDINATES.push_back(x);
+//    _COORDINATES.push_back(y);
 }
 
-//void OGLWidget::keyPress(QKeyEvent *event)
-//{
-//    switch (event->key()) {
-//    case Qt::Key_A:
-
-//        break;
-//    case Qt::Key_Left:
-
-//        break;
-//    case Qt::Key_Right:
 
 
-//        break;
-//    case Qt::Key_Up:
+void createBall(){
 
+    glPushMatrix();
+    //glTranslatef(100.0, 50.0, 0.0);
+        glColor3f(0.0, 200.0, 200.0);
+        glPointSize(20);
+        glBegin(GL_POINTS);
+            glVertex2f(posX, posY);
+        glEnd();
+    glPopMatrix();
 
-//        break;
-//    default:
-//        break;
-//    }
+}
+
+//void restartBall(){
+//    posX = 100.0;
+//    posY = 50.0;
 //}
+
+void corner(){
+
+//    if(posX<-2.66 && posY>0){
+//        posX = -2.66;
+//        posY = 2.;
+//    } else if(posX<-2.66 && posY<0){
+//        posX = -2.66;
+//        posY = -2.;
+//    } else if(posX>2.66 && posY>0){
+//        posX = 2.66;
+//        posY = 2.;
+//    } else if(posX>2.66 && posY<0){
+//        posX = 2.66;
+//        posY = -2.;
+//    }
+
+}
+
+//void lateral(){
+//    if(posY>2) posY = 2;
+//    else posY = -2;
+//}
+
+void placar(){
+
+    glPushMatrix();
+       glTranslatef(180.0, -320.0, 0.0);
+       sprintf(texto, " IC %d x %d VISITANTES", time_casa, time_visitante);
+       DesenhaPlacar(texto);
+    glPopMatrix();
+
+
+
+
+
+
+}
+
+
+void Timer(int value){
+//    if(posX <= -2.66 && posY <= 0.5 && posY >= -0.5) {
+//        if(posX <= -2.79) {
+//            restartBall();
+//        }else{
+//            posX -= 5;
+//        }
+//    } else 	if(posX >= 2.66 && posY <= 0.5 && posY >= -0.5) {
+//        if(posX >= 2.79) {
+//            restartBall();
+//        }else{
+//            posX += 5;
+//        }
+//    }else if(posY>2){
+//        if(posY >= 2.1){
+//            lateral();
+//        }else {
+//            posY+= 5;
+//        }
+//    }else if(posY<-2){
+//        if(posY <= -2.1){
+//            lateral();
+//        }else {
+//            posY-= 5;
+//        }
+//    }else if(posX < -50 || posX > 2.66)
+        corner();
+
+
+    glutPostRedisplay();
+    glutTimerFunc(300,Timer, 0);
+
+}
+
+
+
+
+void OGLWidget::keyPressEvent(QKeyEvent *keyEvent)
+{
+    //int x = event->key();
+   //    int y = event->y();
+
+  _p = keyEvent->key();
+
+
+
+}
 
 
 void OGLWidget::resizeGL(int w, int h)

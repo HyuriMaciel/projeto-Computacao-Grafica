@@ -52,16 +52,14 @@ public:
     static GLfloat _x;
     static GLfloat _y;
     static GLfloat _z;
-    static GLchar _aux;
+    static GLint _p;
 
 protected:
     void initializeGL();
     void resizeGL(int w, int h);
     void paintGL();
     void mousePressEvent(QMouseEvent *event);
- // void keyPress(QKeyEvent *event);
- // void keyPressEvent(QKeyEvent *event);
-
+   void  keyPressEvent(QKeyEvent *keyEvent);
  //void paintEvent(QPaintEvent *event);
 private:
 
