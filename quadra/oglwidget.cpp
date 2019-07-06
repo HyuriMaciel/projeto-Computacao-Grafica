@@ -18,9 +18,13 @@ int time_visitante = 0;
 char texto[30];
 GLfloat win;
 
-GLfloat x = 50.0f;
-GLfloat y = 50.0f;
-GLfloat z = 15.0f;
+static float lado = 293.0f;
+static float lado2 = 188.0f;
+static float z = 15.0f;
+
+//GLfloat x = 50.0f;
+//GLfloat y = 50.0f;
+//GLfloat z = 15.0f;
 
 GLfloat posX = 0.0, posY= 0.0, posZ = 0.0;
 GLint time1 = 0, time2 = 0;
@@ -500,12 +504,12 @@ void DesenhaPlacar(char *string)
 
 void bola(){
     glBegin(GL_QUADS);
-        glColor3f(0.0, 200.0, 200.0);
-        glVertex2f(posX, posY + posZ);
-        glVertex2f(posX, posY);
-        glVertex2f(posX + posZ, posY);
-        glVertex2f(posX + posZ , posY + posZ);
-    glEnd();
+          glColor3f(1.0f, 1.0f, 1.0f);
+          glVertex2f(lado, lado2 + z);
+          glVertex2f(lado, lado2);
+          glVertex2f(lado + z, lado2);
+          glVertex2f(lado + z , lado2 + z);
+      glEnd();
 
 }
 
@@ -656,13 +660,31 @@ void OGLWidget::paintGL()
 
 void OGLWidget::mousePressEvent(QMouseEvent *event)
 {
-    //    cout << "x: " << event->x() << " y: " << event->y() << endl;
+     cout << "x: " << event->x() << " y: " << event->y() << endl;
+    //cout << "Hello";
 
-//    int x = event->x();
-//    int y = event->y();
+    int x = event->x();
+    int y = event->y();
 
-//    _COORDINATES.push_back(x);
-//    _COORDINATES.push_back(y);
+    lado = x;
+    lado2 = y;
+
+    if(lado >= 276 && lado <= 311 && lado2 <= 35 && lado2 >= 5)
+    {
+        time_casa++;
+        lado = 293;
+        lado2 = 188;
+    }
+    if(lado >= 276 && lado <= 311 && lado2 >= 350 && lado2 <= 380 )
+    {
+        time_visitante++;
+        lado = 293;
+        lado2 = 188;
+    }
+
+
+    _COORDINATES.push_back(x);
+    _COORDINATES.push_back(y);
 }
 
 
@@ -717,10 +739,6 @@ void placar(){
     glPopMatrix();
 
 
-
-
-
-
 }
 
 
@@ -766,7 +784,7 @@ void OGLWidget::keyPressEvent(QKeyEvent *keyEvent)
     //int x = event->key();
    //    int y = event->y();
 
-  _p = keyEvent->key();
+  _p = keyEvent-> key();
 
 
 
