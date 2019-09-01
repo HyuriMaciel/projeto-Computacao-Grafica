@@ -57,9 +57,11 @@
 #define FERROGRADE 37
 #define PORTA2 38
 #define JESUS 39
+#define PORTAO1 40
+#define PORTAO2 41
 
-
-
+#define SENHORA 42
+#define CALICE 43
 
 // Camera
 GLdouble phi = M_PI / 2, theta = 0, radius = 450;
@@ -812,10 +814,13 @@ void drawAltarMove(){
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[JESUS]); // cruz altar
     drawRect(0, 60, -146.8, 25,40, 0.5,  0.96, 0.64, 0.38);
+// glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+//     //drawRect(-80.0, 50.0, -90.0, 39.85, 100, 0.3,1 ,1, 0.88); //parede altar esquerda
+ glBindTexture(GL_TEXTURE_2D, texture_handle[SENHORA]); // cruz altar
+  drawRect(-80, 50, -89.0, 30, 20,  0.3, 1 ,1, 0.88);
 
-     //drawRect(-80.0, 50.0, -90.0, 39.85, 100, 0.3,1 ,1, 0.88); //parede altar esquerda
-//    glBindTexture(GL_TEXTURE_2D, texture_handle[SENHORA]); // cruz altar
-//   drawRect(-80, 50, -89.85, 10, 20,  0.3, 0.96 ,0.64, 0.38);
+  //glBindTexture(GL_TEXTURE_2D, texture_handle[CALICE]); // cruz altar
+ //  drawRect(0, 23, -100, 2, 4, 0.2, 0.2 ,1, 0.88);
 }
 
 // Função callback chamada para gerenciar eventos do mouse
@@ -1057,6 +1062,19 @@ void desenha(void) {
     drawDoor(-5,5.1,0,8,9.5,0.5, 2,2,2,2);
     glPopMatrix();
 
+    glPushMatrix();
+     glBindTexture(GL_TEXTURE_2D, texture_handle[ PORTAO1]);
+    glTranslatef(-26, 0, 195);
+    drawDoor(5, 3, 0,8.5,9,0.5, 2,2,2,1);
+    glPopMatrix();
+
+    glPushMatrix();
+     glBindTexture(GL_TEXTURE_2D, texture_handle[ PORTAO2]);
+    glTranslatef(29, 0, 195);
+    drawDoor(-5, 3, 0,8.5,9,0.5, 2,2,2,2);
+    glPopMatrix();
+
+
 
     glutSwapBuffers();
 
@@ -1170,7 +1188,7 @@ void inicializa (void) {
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-    glGenTextures(40, texture_handle);
+    glGenTextures(80, texture_handle);
 
     loadTexture(texture_handle[0], "/home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/pisoprincipal.png");
     loadTexture(texture_handle[1], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/wood.jpg");
@@ -1206,12 +1224,16 @@ void inicializa (void) {
     loadTexture(texture_handle[31], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/pisoIgraja.jpg");
     loadTexture(texture_handle[32], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/pisoentrada.jpg");
     loadTexture(texture_handle[33], "/home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/paredemudo.png");
-    loadTexture(texture_handle[34], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/madeiraAltar1.jpg");
+    loadTexture(texture_handle[34], "/home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/madeiraAltar1.jpg");
     loadTexture(texture_handle[35], "/home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/concreto.png");
     loadTexture(texture_handle[36], "/home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/piso3.png");
     loadTexture(texture_handle[37], "/home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/ferrograde.jpg");
     loadTexture(texture_handle[38], "/home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/porta1.jpg");
     loadTexture(texture_handle[39], "/home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/jesus.png");
+    loadTexture(texture_handle[40], "//home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/portao1.png");
+     loadTexture(texture_handle[41], "//home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/portao2.png");
+     loadTexture(texture_handle[42], "//home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/santaceia.jpg");
+      loadTexture(texture_handle[43], "//home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/calice.png");
 
 
 
