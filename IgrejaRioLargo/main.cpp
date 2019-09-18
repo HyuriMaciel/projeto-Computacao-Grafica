@@ -14,6 +14,9 @@
 #define WIRE 0
 #define FILL 1
 
+
+
+
 #define PISO 0
 #define CRUZ 1
 #define TETO 2
@@ -60,8 +63,13 @@
 #define PORTAO1 40
 #define PORTAO2 41
 
+#define PORTA1 30
+
+
 #define SENHORA 42
 #define CALICE 43
+
+#define PORTA4 44
 
 // Camera
 GLdouble phi = M_PI / 2, theta = 0, radius = 450;
@@ -190,7 +198,7 @@ void drawWindown(){
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[VIDRO]);
     drawRect(-12, 75, 151.5, 15, 35, 2.5 ,116/255, 185/255, 255/255); //janela esquerda torre
-    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[FERROGRADE]);
     drawRect(-4.0, 75, 151.5, 1, 36, 3 ,1.0,  1.0,  1.0);
     drawRect(-20.0, 75, 151.5, 1, 36, 3 ,1.0,  1.0,  1.0);
     drawRect(-12, 93.0, 151.5, 16, 1, 3 ,1.0,  1.0,  1.0);
@@ -204,7 +212,7 @@ void drawWindown(){
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[VIDRO]);
     drawRect(12, 75, 151.5, 15, 35, 2.5 ,116/255, 185/255, 255/255);
-    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[FERROGRADE]);
     drawRect(4.0, 75, 151.5, 1, 36, 3 ,1.0,  1.0,  1.0);
     drawRect(20.0, 75, 151.5, 1, 36, 3 ,1.0,  1.0,  1.0);
     drawRect(12, 93.0, 151.5, 16, 1, 3 ,1.0,  1.0,  1.0);
@@ -219,7 +227,7 @@ void drawWindown(){
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[VIDRO]);
     drawRect(-45, 75, 151.2, 15, 35, 2.5 ,116/255, 185/255, 255/255);
-    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[FERROGRADE]);
     drawRect(-37, 75, 151.2, 1, 36, 3 ,1.0,  1.0,  1.0);
     drawRect(-53, 75, 151.2, 1, 36, 3 ,1.0,  1.0,  1.0);
 
@@ -234,7 +242,7 @@ void drawWindown(){
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[VIDRO]);
     drawRect(45, 75, 151.2, 15, 35, 2.5 ,116/255, 185/255, 255/255); //janela esquerda torre
-    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[FERROGRADE]);
     drawRect(37, 75, 151.2, 1, 36, 3 ,1.0,  1.0,  1.0);
     drawRect(53, 75, 151.2, 1, 36, 3 ,1.0,  1.0,  1.0);
 
@@ -250,7 +258,7 @@ void drawWindown(){
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[VIDRO]);
     drawRect(-85, 25, 151, 15, 35, 2.5 ,116/255, 185/255, 255/255); //janela esquerda torre
-    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[FERROGRADE]);
     drawRect((-85 -8), 25, 151, 1, 36, 3 ,1.0,  1.0,  1.0);
     drawRect((-85+8), 25, 151, 1, 36, 3 ,1.0,  1.0,  1.0);
 
@@ -265,7 +273,7 @@ void drawWindown(){
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[VIDRO]);
     drawRect(85, 25, 151, 15, 35, 2.5 ,116/255, 185/255, 255/255); //janela esquerda torre
-    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[FERROGRADE]);
     drawRect((85 -8), 25, 151, 1, 36, 3 ,1.0,  1.0,  1.0);
     drawRect((85+8), 25, 151, 1, 36, 3 ,1.0,  1.0,  1.0);
 
@@ -281,7 +289,7 @@ void drawWindown(){
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[VIDRO]);
     drawRect(-99.85, 75, 50, 1, 35, 15 ,116/255, 185/255, 255/255); //janela esquerda torre
-    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[FERROGRADE]);
     drawRect(-99.85, 75, (50 - 8), 1, 35, 2 ,1.0,  1.0,  1.0);
     drawRect(-99.85, 75,  (50+8), 1, 35, 2 ,1.0,  1.0,  1.0);
 
@@ -296,7 +304,7 @@ void drawWindown(){
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[VIDRO]);
     drawRect(-99.85, 75, 80, 1, 35, 15 ,116/255, 185/255, 255/255); //janela esquerda torre
-    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[FERROGRADE]);
     drawRect(-99.85, 75, (80 - 8), 1, 35, 2 ,1.0,  1.0,  1.0);
     drawRect(-99.85, 75,  (80+8), 1, 35, 2 ,1.0,  1.0,  1.0);
 
@@ -311,7 +319,7 @@ void drawWindown(){
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[VIDRO]);
     drawRect(-99.85, 75, 20, 1, 35, 15 ,116/255, 185/255, 255/255); //janela esquerda torre
-    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[FERROGRADE]);
     drawRect(-99.85, 75, ( 20 - 8), 1, 35, 2 ,1.0,  1.0,  1.0);
     drawRect(-99.85, 75,  (20+8), 1, 35, 2 ,1.0,  1.0,  1.0);
 
@@ -326,7 +334,7 @@ void drawWindown(){
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[VIDRO]);
     drawRect(-99.85, 75, -10, 1, 35, 15 ,116/255, 185/255, 255/255); //janela esquerda torre
-    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[FERROGRADE]);
     drawRect(-99.85, 75, (  -10 - 8), 1, 35, 2 ,1.0,  1.0,  1.0);
     drawRect(-99.85, 75,  (  -10+8), 1, 35, 2 ,1.0,  1.0,  1.0);
 
@@ -341,7 +349,7 @@ void drawWindown(){
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[VIDRO]);
     drawRect(-99.85, 75, -40, 1, 35, 15 ,116/255, 185/255, 255/255); //janela esquerda torre
-    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[FERROGRADE]);
     drawRect(-99.85, 75, (-40 - 8), 1, 35, 2 ,1.0,  1.0,  1.0);
     drawRect(-99.85, 75,  (-40+8), 1, 35, 2 ,1.0,  1.0,  1.0);
 
@@ -356,7 +364,7 @@ void drawWindown(){
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[VIDRO]);
     drawRect(99.85, 75, 50, 1, 35, 15 ,116/255, 185/255, 255/255); //janela esquerda torre
-    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[FERROGRADE]);
     drawRect(99.85, 75, (50 - 8), 1, 35, 2 ,1.0,  1.0,  1.0);
     drawRect(99.85, 75,  (50+8), 1, 35, 2 ,1.0,  1.0,  1.0);
 
@@ -371,7 +379,7 @@ void drawWindown(){
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[VIDRO]);
     drawRect(99.85, 75, 80, 1, 35, 15 ,116/255, 185/255, 255/255); //janela esquerda torre
-    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[FERROGRADE]);
     drawRect(99.85, 75, (80 - 8), 1, 35, 2 ,1.0,  1.0,  1.0);
     drawRect(99.85, 75,  (80+8), 1, 35, 2 ,1.0,  1.0,  1.0);
 
@@ -386,7 +394,7 @@ void drawWindown(){
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[VIDRO]);
     drawRect(99.85, 75, 20, 1, 35, 15 ,116/255, 185/255, 255/255); //janela esquerda torre
-    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[FERROGRADE]);
     drawRect(99.85, 75, ( 20 - 8), 1, 35, 2 ,1.0,  1.0,  1.0);
     drawRect(99.85, 75,  (20+8), 1, 35, 2 ,1.0,  1.0,  1.0);
 
@@ -401,7 +409,7 @@ void drawWindown(){
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[VIDRO]);
     drawRect(99.85, 75, -10, 1, 35, 15 ,116/255, 185/255, 255/255); //janela esquerda torre
-    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[FERROGRADE]);
     drawRect(99.85, 75, (  -10 - 8), 1, 35, 2 ,1.0,  1.0,  1.0);
     drawRect(99.85, 75,  (  -10+8), 1, 35, 2 ,1.0,  1.0,  1.0);
 
@@ -416,7 +424,7 @@ void drawWindown(){
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[VIDRO]);
     drawRect(99.85, 75, -40, 1, 35, 15 ,116/255, 185/255, 255/255); //janela esquerda torre
-    glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[FERROGRADE]);
     drawRect(99.85, 75, (-40 - 8), 1, 35, 2 ,1.0,  1.0,  1.0);
     drawRect(99.85, 75,  (-40+8), 1, 35, 2 ,1.0,  1.0,  1.0);
 
@@ -793,9 +801,23 @@ void drawSino(){
 void drawAltarMove(){
 
 
+
+
+
+
     glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREPRETO]);
     drawRect(0, 20, -100, 30, 0.5, 15, 0.28, 0.24, 0.55); // Mesa altar tampo
     drawRect(0, 10, -100, 25, 20, 14, 0.28, 0.24, 0.55); // Mesa altar base
+
+    glPushMatrix();
+        glColor3f(0, 0, 1);
+        glTranslatef(0, 22, -100);
+        glutWireSphere(1.8, 40, 80);
+    glPopMatrix();
+
+
+
+
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[MARMOREBRANCO]);
     drawRect(-10, 10, -92, 1, 19.5, 1, 1, 1, 1); // Mesa altar coluna esquerda
@@ -859,7 +881,6 @@ void desenha(void) {
     //glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
      glBindTexture(GL_TEXTURE_2D, texture_handle[PISO]);
     drawRect(0, 0.3, 0, 200,0.5, 300,2,1,1); // piso dois 1
-
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[PISO2]);
     drawRect(0, -3.15, 0, 200, 6.0, 300,1,1,1); // piso dois 2
@@ -960,8 +981,8 @@ void desenha(void) {
     glBindTexture(GL_TEXTURE_2D, texture_handle[PISO]);
     drawRect(0, 50, 125, 199.7, 0.3, 50.0 ,1,1,1); //teto mezanino entrada cima
     drawRect(0, 50, 80 , 140, 0.3, 40 ,1,1,1);
-    drawRect(-84, 50, 50 , 30, 0.3, 100 ,1,0,0);// teto esquerdo
-    drawRect(84, 50, 50 , 30, 0.3, 100 ,1,0,0);// teto direito
+    drawRect(-84, 50, 50 , 30, 0.3, 100 ,1,1,1);// teto esquerdo
+    drawRect(84, 50, 50 , 30, 0.3, 100 ,1,1,1);// teto direito
 
 
     glBindTexture(GL_TEXTURE_2D, texture_handle[METAL]);
@@ -1051,7 +1072,7 @@ void desenha(void) {
 
 
     glPushMatrix();
-     glBindTexture(GL_TEXTURE_2D, texture_handle[PORTA1]);
+     glBindTexture(GL_TEXTURE_2D, texture_handle[PORTA4]);
     glTranslatef(-26, 0, 151.25);
     drawDoor(5,5.1,0,9,9.5,0.5, 2,2,2,1);
     glPopMatrix();
@@ -1158,7 +1179,7 @@ static void timer(int value){
 void inicializa (void) {
 
     GLfloat luzAmbiente[4] = {0.3, 0.3, 0.3, 1.0};
-    GLfloat luzDifusa[4]={0.4, 0.4, 0.4, 1.0};
+    GLfloat luzDifusa[4]={0 ,40, -100, 1.0};
     GLfloat posicaoLuz[4]={40, 20.0, 30.0, 1.0};
     // sombreamento  dos objetos
     glShadeModel(GL_SMOOTH);
@@ -1178,8 +1199,6 @@ void inicializa (void) {
     // Habilita a luz de número 0
     glEnable(GL_LIGHT0);
     // Habilita o depth-buffering
-
-
     glClearColor(0, 0, 0, 1);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
@@ -1204,7 +1223,7 @@ void inicializa (void) {
     loadTexture(texture_handle[11], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/p.jpg");
     loadTexture(texture_handle[12], "/home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/solo.jpg");
     loadTexture(texture_handle[13], "/home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/sinoo.png");
-    loadTexture(texture_handle[14], "/home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/vidroJ.jpg");
+    loadTexture(texture_handle[14], "/home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/vidrojanela.jpg");
     loadTexture(texture_handle[15], "/home/hyuri/git/projetoCG/IgrejaRioLargo/img/chao.jpg");
     loadTexture(texture_handle[16], "/home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/via1.jpg");
     loadTexture(texture_handle[17], "/home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/via2.jpg");
@@ -1234,7 +1253,7 @@ void inicializa (void) {
      loadTexture(texture_handle[41], "//home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/portao2.png");
      loadTexture(texture_handle[42], "//home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/santaceia.jpg");
       loadTexture(texture_handle[43], "//home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/calice.png");
-
+ loadTexture(texture_handle[44], "//home/hyuri/Área de Trabalho/projetoCG-master/IgrejaRioLargo/img/porta4.jpg");
 
 
     glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
