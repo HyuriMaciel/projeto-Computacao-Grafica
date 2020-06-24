@@ -17,8 +17,8 @@ Projetos que aplicam técnicas classicas de computação gráfica. Utilizamos a 
 ## Para rodar o projeto IgrejaRioLargo deve-se fazer :hammer:
 
  - Orientações:
-   -mudar o diretorio das imagens;
-   -adicionar a biblioteca SFML : https://www.sfml-dev.org/tutorials/2.5/start-linux.php
+    - Mudar o diretorio das imagens;
+    - Adicionar a biblioteca SFML : https://www.sfml-dev.org/tutorials/2.5/start-linux.php
    
 ## Contribuições  :two_men_holding_hands: :two_women_holding_hands:
 
