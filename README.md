@@ -20,7 +20,7 @@ Projetos que aplicam técnicas classicas de computação gráfica. Utilizamos a 
    -mudar o diretorio das imagens;
    -adicionar a biblioteca SFML : https://www.sfml-dev.org/tutorials/2.5/start-linux.php
    
-## Contribuições 
+## Contribuições  :two_men_holding_hands: :two_women_holding_hands:
 
 [<img src="https://avatars0.githubusercontent.com/u/22007545?s=400&v=4" width=115 > <br> <sub> Everton Borges </sub>](hhttps://github.com/everttonbs) |
 | :---: |
